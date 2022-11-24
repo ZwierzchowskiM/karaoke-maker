@@ -1,17 +1,38 @@
 package com.karaoke.karaokemaker.domain;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Bar {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-    private String time;
+
+    @ManyToMany
+    private List<Chord> chords = new ArrayList<>();
 
 
     public Bar() {
     }
+
+    public void addChord(Chord chord) {
+        chords.add(chord);
+    }
+
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long id) {
+        Id = id;
+    }
+
+
+
+
+
 }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Karaoke Maker</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <style>
+    table, td {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+<header>
+    <h1>Karaoke Maker </h1>
+    <img src="/images/karaoke_logo.png" alt="kod">
+</header>
+
+<h1>Dodaj utwor</h1>
+<form method="post" action="/save">
+    <label>
+        Treść:
+        <textarea name="name" placeholder="Tytuł utworu..." rows="1" cols="30"></textarea>
+    </label>
+    <button type="submit">Zapisz</button>
+</form>
+
+
+</body>
+</html>

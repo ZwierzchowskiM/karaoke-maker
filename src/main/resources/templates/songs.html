@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Karaoke Maker</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <style>
+    table, td {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+<header>
+    <h1>Karaoke Maker </h1>
+</header>
+
+
+<h2>Lista utworow</h2>
+<table>
+    <thead>
+    <tr>
+        <td>Id</td>
+        <td>Nazwa</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="song, status: ${songs}">
+        <td th:text="${status.count}">1</td>
+        <td th:text="${song.name}">Chipsy paprykowe</td>
+    </tr>
+    </tbody>
+</table>
+
+<form method="get" action="/home">
+    <button type="submit">Powrót</button>
+</form>
+
+
+</body>
+</html>
