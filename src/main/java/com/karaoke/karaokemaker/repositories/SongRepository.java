@@ -1,6 +1,6 @@
 package com.karaoke.karaokemaker.repositories;
 
-import com.karaoke.karaokemaker.domain.Song;
+import com.karaoke.karaokemaker.model.Song;
 import org.springframework.data.repository.CrudRepository;
 
 

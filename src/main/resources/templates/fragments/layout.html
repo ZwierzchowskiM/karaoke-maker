@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <title>Karaoke Maker</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/styles.css" th:href="@{/stylesheets/styles.css}">
+    <div th:insert="~{fragments/navbar :: navbar}"> </div>
+
+    <style>
+        table {
+            max-width: 600px;
+            width: 50%;
+        }
+        td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+
+<main layout:fragment="content">
+</main>
+
+<footer th:fragment="footer">
+    <p class="footer">Karaoke Maker - all rights reserved</p>
+</footer>
+</body>
+</html>

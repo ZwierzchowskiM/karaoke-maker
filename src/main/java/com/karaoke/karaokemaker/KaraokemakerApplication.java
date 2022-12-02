@@ -1,19 +1,16 @@
 package com.karaoke.karaokemaker;
 
-import com.karaoke.karaokemaker.domain.Bar;
-import com.karaoke.karaokemaker.domain.Chord;
-import com.karaoke.karaokemaker.domain.Song;
-import com.karaoke.karaokemaker.domain.User;
+import com.karaoke.karaokemaker.model.Bar;
+import com.karaoke.karaokemaker.model.Chord;
+import com.karaoke.karaokemaker.model.Song;
+import com.karaoke.karaokemaker.model.User;
 import com.karaoke.karaokemaker.repositories.ChordRepository;
-import com.karaoke.karaokemaker.repositories.SongRepository;
 import com.karaoke.karaokemaker.repositories.UserRepository;
 import com.karaoke.karaokemaker.service.ChordService;
 import com.karaoke.karaokemaker.service.SongService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-
-import java.util.Scanner;
 
 @SpringBootApplication
 public class KaraokemakerApplication {
@@ -44,13 +41,6 @@ public class KaraokemakerApplication {
 		chordService.findChordsByNote("F").forEach(System.out::println);
 
 
-		User user1 = new User("Jan", "Kowalski", "kowalski@gmail.com");
-		User user2 = new User("Lukasz", "Nowak", "nowak@gmail.com");
-		UserRepository userRepository = context.getBean(UserRepository.class);
-		userRepository.save(user1);
-		userRepository.save(user2);
-
-
 		Song song1 = new Song("Dmuchawce latawce");
 		Song song2 = new Song("Konik na biegunach");
 		Song song3 = new Song("Winda do nieba");
@@ -70,15 +60,9 @@ public class KaraokemakerApplication {
 		bar2.addChord(chord6);
 		bar2.addChord(chord4);
 
-//		BarRepository barRepository = context.getBean(BarRepository.class);
-//
-//
-//		barRepository.save(bar1);
-//		barRepository.save(bar3);
 
 		song1.addBar(bar1);
 		song1.addBar(bar2);
-//		songRepository.save(song1);
 
 
 

@@ -7,3 +7,7 @@ spring:
   jpa:
     show-sql: true
     defer-datasource-initialization: true
+  security:
+    user:
+      name: admin
+      password: admin

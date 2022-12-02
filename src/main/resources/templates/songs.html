@@ -1,21 +1,15 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
 <head>
-    <title>Karaoke Maker</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="/stylesheets/styles.css">
-    <style>
-    table, td {
-      border: 1px solid black;
-    }
-  </style>
 </head>
 <body>
 <header>
     <h1>Karaoke Maker </h1>
 </header>
 
-
+<main  layout:fragment="content">
 <h2>Lista utworow</h2>
 <table>
     <thead>
@@ -27,15 +21,15 @@
     <tbody>
     <tr th:each="song, status: ${songs}">
         <td th:text="${status.count}">1</td>
-        <td th:text="${song.name}">Chipsy paprykowe</td>
+        <td th:text="${song.name}" class="song-name">Przykładowe zdjęcie 3</td>
     </tr>
     </tbody>
 </table>
 
-<form method="get" action="/home">
-    <button type="submit">Powrót</button>
-</form>
 
+
+<p><a href="/">Strona główna</a></p>
+</main>
 
 </body>
 </html>

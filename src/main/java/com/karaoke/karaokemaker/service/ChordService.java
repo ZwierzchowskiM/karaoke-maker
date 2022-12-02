@@ -1,6 +1,6 @@
 package com.karaoke.karaokemaker.service;
 
-import com.karaoke.karaokemaker.domain.Chord;
+import com.karaoke.karaokemaker.model.Chord;
 import com.karaoke.karaokemaker.repositories.ChordRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,4 +31,5 @@ public class ChordService {
                         chord.getType()
                 )).collect(Collectors.toList());
     }
+
 }

@@ -1,4 +1,4 @@
-package com.karaoke.karaokemaker.domain;
+package com.karaoke.karaokemaker.model;
 
 
 import javax.persistence.*;

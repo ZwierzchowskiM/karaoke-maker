@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel administracyjny</title>
+    <link rel="stylesheet" href="../static/styles/main.css" th:href="@{/styles/main.css}"/>
+</head>
+<body>
+
+<main layout:fragment="content">
+<div class="container">
+    <h1>Panel administracyjny</h1>
+    <h2>Lista użytkowników</h2>
+    <ul>
+        <li th:each="email: ${userEmails}">
+            <span th:text="${email}">jan@kowalski.com</span>
+            &nbsp;
+            <a href="#" th:href="@{/admin/delete-user(email=${email})}">Usuń</a>
+        </li>
+    </ul>
+</div>
+
+</main>
+</body>
+</html>

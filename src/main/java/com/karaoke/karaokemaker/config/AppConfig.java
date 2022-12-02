@@ -1,8 +1,7 @@
-package com.karaoke.karaokemaker;
+package com.karaoke.karaokemaker.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import java.util.Scanner;
 
 @Configuration
@@ -12,5 +11,9 @@ import java.util.Scanner;
         Scanner scanner() {
             return new Scanner(System.in);
         }
-    }
+
+
+
+
+}
 
