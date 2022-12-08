@@ -16,6 +16,10 @@ public class Song {
     @JoinColumn(name = "song_id")
     private List<Bar> bars = new ArrayList<>();
 
+    @OneToMany (cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @JoinColumn(name = "song_id")
+    private List<SongPart> structure = new ArrayList<>();
+
 
 
     public Long getId() {
@@ -34,7 +38,21 @@ public class Song {
         this.name = name;
     }
 
+    public List<Bar> getBars() {
+        return bars;
+    }
 
+    public void setBars(List<Bar> bars) {
+        this.bars = bars;
+    }
+
+    public List<SongPart> getStructure() {
+        return structure;
+    }
+
+    public void setStructure(List<SongPart> structure) {
+        this.structure = structure;
+    }
 
     public Song() {
     }
@@ -56,4 +74,10 @@ public class Song {
     public void addBar(Bar bar) {
         this.bars.add(bar);
     }
+
+    public void addPart(SongPart songPart) {
+        this.structure.add(songPart);
+    }
+
+
 }

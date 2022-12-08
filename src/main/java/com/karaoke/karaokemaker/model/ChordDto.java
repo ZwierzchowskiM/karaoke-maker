@@ -1,10 +1,11 @@
 package com.karaoke.karaokemaker.model;
 
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "chords")
-public class Chord {
+@Table(name = "chordsDto")
+public class ChordDto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,34 +13,27 @@ public class Chord {
     private String singleNote;
     private String type;        // maj, moll, dominant7, maj9 itp
     private int lenght;
-    private String path;
     private String partName;
 
 
 
-    public Chord() {
+    public ChordDto() {
     }
 
-    public Chord(String singleNote, String type, int lenght, String path, String partName) {
+    public ChordDto(String singleNote, String type, int lenght, String partName) {
         this.singleNote = singleNote;
         this.type = type;
         this.lenght = lenght;
-        this.path = path;
         this.partName = partName;
     }
 
-    public Chord(String singleNote, String type) {
+    public ChordDto(String singleNote, String type) {
         this.singleNote = singleNote;
         this.type = type;
     }
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        id = id;
-    }
+
 
     public String getSingleNote() {
         return singleNote;
@@ -65,13 +59,6 @@ public class Chord {
         this.lenght = lenght;
     }
 
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
 
     public String getPartName() {
         return partName;
@@ -83,12 +70,11 @@ public class Chord {
 
     @Override
     public String toString() {
-        return "Chord{" +
+        return "ChordDto{" +
                 "singleNote='" + singleNote + '\'' +
                 ", type='" + type + '\'' +
                 ", lenght=" + lenght +
-                ", path='" + path + '\'' +
-                ", partName='" + partName +
-                '}' + "\n" ;
+                ", partName='" + partName + '\'' +
+                '}';
     }
 }

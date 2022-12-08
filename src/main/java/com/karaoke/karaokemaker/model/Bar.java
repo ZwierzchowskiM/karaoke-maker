@@ -2,7 +2,9 @@ package com.karaoke.karaokemaker.model;
 
 
 import javax.persistence.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -12,15 +14,23 @@ public class Bar {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    @ManyToMany
-    private List<Chord> chords = new ArrayList<>();
+    @OneToMany (cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @JoinColumn(name = "bar_id")
+    @OrderColumn
+    private ChordDto[] chords =  new ChordDto[4];
+
+    private String partName;
+
+
+
 
 
     public Bar() {
     }
 
-    public void addChord(Chord chord) {
-        chords.add(chord);
+    public void addChord(ChordDto chord, int number) {
+
+        chords[number] = chord;
     }
 
     public Long getId() {
@@ -31,8 +41,27 @@ public class Bar {
         Id = id;
     }
 
+    public String getPartName() {
+        return partName;
+    }
 
+    public void setPartName(String partName) {
+        this.partName = partName;
+    }
 
+    public ChordDto[] getChords() {
+        return chords;
+    }
 
+    public void setChords(ChordDto[] chords) {
+        this.chords = chords;
+    }
 
+    @Override
+    public String toString() {
+        return "Bar{" +
+                "chords=" + Arrays.toString(chords) +
+                ", partName='" + partName + '\'' +
+                '}';
+    }
 }

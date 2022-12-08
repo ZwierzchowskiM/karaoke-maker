@@ -22,6 +22,8 @@ class RegistrationController {
         return "registration-form";
     }
 
+
+    // TODO zwracać jason z informacją o kodzie błędu lub 0
     @PostMapping("/register")
     String register(User userRegistration) {
         userService.register(userRegistration);

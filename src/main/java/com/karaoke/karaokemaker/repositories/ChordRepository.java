@@ -9,6 +9,7 @@ import java.util.List;
 public interface ChordRepository extends CrudRepository<Chord, Long> {
 
     List<Chord> findAllBySingleNote(String note);
+   // List<Chord> findAllBySingleNoteAndByType(String note, String type);
 
 
 

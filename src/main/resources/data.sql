@@ -1,18 +1,14 @@
 INSERT INTO
-    chords(single_note,type)
+    chords(single_note,type,lenght,path,part_name)
 VALUES
-     ('Bb','MOLL'),
-     ('C','MAJ9'),
-     ('D','MOLL'),
-     ('D','MAJ9'),
-     ('D','DOMINANT7'),
-     ('F','MAJ'),
-     ('F','MAJ7'),
-     ('F','MAJ9'),
-     ('F','DOMINANT7'),
-     ('F','MOLL');
---sciezka
---audioFiles/Source/C/Major/Cmaj.wav
+     ('C','MAJ',4,'Files/audioFiles/Source/C/Major/Cmaj.wav','ZW'),
+     ('D','MAJ',4,'Files/audioFiles/Source/D/Major/Dmaj.wav','ZW'),
+     ('C','MAJ',4,'Files/audioFiles/Source/C/Major/Cmaj.wav','REF'),
+     ('D','MAJ',4,'Files/audioFiles/Source/D/Major/Dmaj.wav','REF'),
+     ('E','MAJ',4,'/resoureces/audioFiles/Source/C/Major/Cmaj.wav','ZW'),
+     ('G','MAJ9',4,'/resoureces/audioFiles/Source/C/Major/Cmaj.wav','REF'),
+     ('F','MAJ',4,'/resoureces/audioFiles/Source/C/Major/Cmaj.wav','REF');
+
 
 INSERT INTO
     users (first_name, last_name, email, password, role)
