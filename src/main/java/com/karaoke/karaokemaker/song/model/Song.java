@@ -1,4 +1,7 @@
-package com.karaoke.karaokemaker.model;
+package com.karaoke.karaokemaker.song.model;
+
+import com.karaoke.karaokemaker.bar.model.Bar;
+import com.karaoke.karaokemaker.model.SongPart;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -18,7 +21,7 @@ public class Song {
 
     @OneToMany (cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "song_id")
-    private List<SongPart> structure = new ArrayList<>();
+    private List<SongPart> songParts = new ArrayList<>();
 
 
 
@@ -46,12 +49,12 @@ public class Song {
         this.bars = bars;
     }
 
-    public List<SongPart> getStructure() {
-        return structure;
+    public List<SongPart> getSongParts() {
+        return songParts;
     }
 
-    public void setStructure(List<SongPart> structure) {
-        this.structure = structure;
+    public void setSongParts(List<SongPart> songParts) {
+        this.songParts = songParts;
     }
 
     public Song() {
@@ -76,7 +79,7 @@ public class Song {
     }
 
     public void addPart(SongPart songPart) {
-        this.structure.add(songPart);
+        this.songParts.add(songPart);
     }
 
 

@@ -1,4 +1,6 @@
-package com.karaoke.karaokemaker.model;
+package com.karaoke.karaokemaker.user.model;
+
+import com.karaoke.karaokemaker.song.model.Song;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;

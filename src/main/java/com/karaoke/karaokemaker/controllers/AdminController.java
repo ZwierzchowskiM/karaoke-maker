@@ -1,6 +1,6 @@
 package com.karaoke.karaokemaker.controllers;
 
-import com.karaoke.karaokemaker.service.UserService;
+import com.karaoke.karaokemaker.user.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,12 +1,14 @@
 package com.karaoke.karaokemaker;
 
+import com.karaoke.karaokemaker.bar.model.Bar;
+import com.karaoke.karaokemaker.chord.model.Chord;
+import com.karaoke.karaokemaker.song.model.Song;
 import com.karaoke.karaokemaker.model.*;
-import com.karaoke.karaokemaker.service.SongService;
-import com.karaoke.karaokemaker.service.SongGenerator;
+import com.karaoke.karaokemaker.song.service.SongService;
+import com.karaoke.karaokemaker.song.service.SongGenerator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 import java.util.List;

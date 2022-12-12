@@ -1,7 +1,7 @@
 package com.karaoke.karaokemaker.config;
 
 
-import com.karaoke.karaokemaker.service.UserService;
+import com.karaoke.karaokemaker.user.service.UserService;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,7 +24,7 @@ class CustomUserDetailsService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException(String.format("User with email %s not found", username)));
     }
 
-    private UserDetails createUserDetails(com.karaoke.karaokemaker.model.User credentials) {
+    private UserDetails createUserDetails(com.karaoke.karaokemaker.user.model.User credentials) {
         return User.builder()
                 .username(credentials.getEmail())
                 .password(credentials.getPassword())

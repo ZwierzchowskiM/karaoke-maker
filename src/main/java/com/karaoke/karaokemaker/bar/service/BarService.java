@@ -1,13 +1,13 @@
-package com.karaoke.karaokemaker.service;
+package com.karaoke.karaokemaker.bar.service;
 
-import com.karaoke.karaokemaker.model.Bar;
-import com.karaoke.karaokemaker.model.Chord;
+import com.karaoke.karaokemaker.bar.model.Bar;
+import com.karaoke.karaokemaker.chord.model.Chord;
 import com.karaoke.karaokemaker.model.ChordDto;
-import com.karaoke.karaokemaker.repositories.BarRepository;
+import com.karaoke.karaokemaker.bar.repositories.BarRepository;
+import com.karaoke.karaokemaker.chord.service.ChordService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;

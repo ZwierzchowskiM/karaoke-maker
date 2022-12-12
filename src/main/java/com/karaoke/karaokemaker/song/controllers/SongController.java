@@ -1,8 +1,8 @@
-package com.karaoke.karaokemaker.controllers;
+package com.karaoke.karaokemaker.song.controllers;
 
-import com.karaoke.karaokemaker.model.Song;
-import com.karaoke.karaokemaker.repositories.SongRepository;
-import com.karaoke.karaokemaker.service.SongService;
+import com.karaoke.karaokemaker.song.model.Song;
+import com.karaoke.karaokemaker.song.repositories.SongRepository;
+import com.karaoke.karaokemaker.song.service.SongService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;

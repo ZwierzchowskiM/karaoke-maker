@@ -1,20 +1,10 @@
-package com.karaoke.karaokemaker.controllers;
+package com.karaoke.karaokemaker.song.controllers;
 
-import com.karaoke.karaokemaker.model.Bar;
-import com.karaoke.karaokemaker.model.Song;
-import com.karaoke.karaokemaker.model.User;
-import com.karaoke.karaokemaker.repositories.SongRepository;
-import com.karaoke.karaokemaker.service.SongService;
-import org.springframework.http.ResponseEntity;
+import com.karaoke.karaokemaker.song.repositories.SongRepository;
+import com.karaoke.karaokemaker.song.service.SongService;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-
-import java.net.URI;
-import java.util.List;
 
 @Controller
 @RequestMapping("/song-create")

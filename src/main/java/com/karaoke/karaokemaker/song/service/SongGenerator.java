@@ -1,10 +1,10 @@
-package com.karaoke.karaokemaker.service;
+package com.karaoke.karaokemaker.song.service;
 
 
 
 
-import com.karaoke.karaokemaker.model.Chord;
-import com.karaoke.karaokemaker.model.Song;
+import com.karaoke.karaokemaker.chord.model.Chord;
+import com.karaoke.karaokemaker.song.model.Song;
 import org.springframework.stereotype.Service;
 
 import javax.sound.sampled.AudioFileFormat;

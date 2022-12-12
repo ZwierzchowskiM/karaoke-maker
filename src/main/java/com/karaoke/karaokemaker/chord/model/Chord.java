@@ -1,4 +1,4 @@
-package com.karaoke.karaokemaker.model;
+package com.karaoke.karaokemaker.chord.model;
 
 import javax.persistence.*;
 

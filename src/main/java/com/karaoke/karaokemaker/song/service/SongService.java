@@ -1,8 +1,12 @@
-package com.karaoke.karaokemaker.service;
+package com.karaoke.karaokemaker.song.service;
 
 
+import com.karaoke.karaokemaker.bar.model.Bar;
+import com.karaoke.karaokemaker.chord.model.Chord;
+import com.karaoke.karaokemaker.song.model.Song;
 import com.karaoke.karaokemaker.model.*;
-import com.karaoke.karaokemaker.repositories.SongRepository;
+import com.karaoke.karaokemaker.song.repositories.SongRepository;
+import com.karaoke.karaokemaker.bar.service.BarService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -64,7 +68,7 @@ public class SongService {
         ArrayList<Integer> songPartsBarNumbers = new ArrayList<>();
         ArrayList<String> songPartsNames =  new ArrayList<>();
 
-        for (SongPart p: song.getStructure() ) {
+        for (SongPart p: song.getSongParts() ) {
             songPartsBarNumbers.add(p.getBarNumber());
             songPartsNames.add(p.getPartName());
         }

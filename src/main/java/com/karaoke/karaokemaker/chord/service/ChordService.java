@@ -1,15 +1,12 @@
-package com.karaoke.karaokemaker.service;
+package com.karaoke.karaokemaker.chord.service;
 
-import com.karaoke.karaokemaker.model.Chord;
+import com.karaoke.karaokemaker.chord.model.Chord;
 import com.karaoke.karaokemaker.model.ChordDto;
-import com.karaoke.karaokemaker.repositories.ChordRepository;
+import com.karaoke.karaokemaker.chord.repositories.ChordRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -67,7 +64,7 @@ public class ChordService {
     }
 
 
-    List<Chord> readFromDataBaseChord (List<ChordDto> chordsInBar) {
+    public List<Chord> readFromDataBaseChord (List<ChordDto> chordsInBar) {
 
         List<Chord> chords = chordsInBar.stream().map(chord->mapDtoToChord(chord)).collect(Collectors.toList());
 

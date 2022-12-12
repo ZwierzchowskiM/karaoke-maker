@@ -1,11 +1,10 @@
-package com.karaoke.karaokemaker.model;
+package com.karaoke.karaokemaker.bar.model;
 
+
+import com.karaoke.karaokemaker.model.ChordDto;
 
 import javax.persistence.*;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 @Entity
 public class Bar {

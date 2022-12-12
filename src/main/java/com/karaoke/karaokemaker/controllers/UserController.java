@@ -1,14 +1,10 @@
 package com.karaoke.karaokemaker.controllers;
 
-import com.karaoke.karaokemaker.model.User;
-import com.karaoke.karaokemaker.service.UserService;
+import com.karaoke.karaokemaker.user.model.User;
+import com.karaoke.karaokemaker.user.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import javax.validation.Valid;
 
 @Controller
 public class UserController {
