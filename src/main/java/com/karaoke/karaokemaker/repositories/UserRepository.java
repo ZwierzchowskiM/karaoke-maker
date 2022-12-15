@@ -1,6 +1,6 @@
-package com.karaoke.karaokemaker.user.repositories;
+package com.karaoke.karaokemaker.repositories;
 
-import com.karaoke.karaokemaker.user.model.User;
+import com.karaoke.karaokemaker.model.User;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

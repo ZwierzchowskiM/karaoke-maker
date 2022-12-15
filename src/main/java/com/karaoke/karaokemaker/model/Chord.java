@@ -1,4 +1,4 @@
-package com.karaoke.karaokemaker.chord.model;
+package com.karaoke.karaokemaker.model;
 
 import javax.persistence.*;
 
@@ -11,34 +11,21 @@ public class Chord {
     private Long id;
     private String singleNote;
     private String type;        // maj, moll, dominant7, maj9 itp
-    private int lenght;
+    private int length;
     private String path;
-    private String partName;
+    private int complexity;
 
 
 
     public Chord() {
     }
 
-    public Chord(String singleNote, String type, int lenght, String path, String partName) {
+    public Chord(String singleNote, String type, int lenght, String path, int complexity) {
         this.singleNote = singleNote;
         this.type = type;
-        this.lenght = lenght;
+        this.length = lenght;
         this.path = path;
-        this.partName = partName;
-    }
-
-    public Chord(String singleNote, String type) {
-        this.singleNote = singleNote;
-        this.type = type;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        id = id;
+        this.complexity = complexity;
     }
 
     public String getSingleNote() {
@@ -58,11 +45,11 @@ public class Chord {
     }
 
     public int getLenght() {
-        return lenght;
+        return length;
     }
 
     public void setLenght(int lenght) {
-        this.lenght = lenght;
+        this.length = lenght;
     }
 
     public String getPath() {
@@ -73,22 +60,22 @@ public class Chord {
         this.path = path;
     }
 
-    public String getPartName() {
-        return partName;
+    public int getComplexity() {
+        return complexity;
     }
 
-    public void setPartName(String partName) {
-        this.partName = partName;
+    public void setComplexity(int complexity) {
+        this.complexity = complexity;
     }
 
     @Override
     public String toString() {
         return "Chord{" +
-                "singleNote='" + singleNote + '\'' +
+                ", singleNote='" + singleNote + '\'' +
                 ", type='" + type + '\'' +
-                ", lenght=" + lenght +
+                ", lenght=" + length +
                 ", path='" + path + '\'' +
-                ", partName='" + partName +
-                '}' + "\n" ;
+                ", complexity=" + complexity +
+                '}';
     }
 }

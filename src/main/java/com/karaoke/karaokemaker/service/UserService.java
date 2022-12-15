@@ -1,7 +1,7 @@
-package com.karaoke.karaokemaker.user.service;
+package com.karaoke.karaokemaker.service;
 
-import com.karaoke.karaokemaker.user.model.User;
-import com.karaoke.karaokemaker.user.repositories.UserRepository;
+import com.karaoke.karaokemaker.model.User;
+import com.karaoke.karaokemaker.repositories.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

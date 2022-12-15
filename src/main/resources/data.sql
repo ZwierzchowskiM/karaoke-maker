@@ -1,13 +1,10 @@
 INSERT INTO
-    chords(single_note,type,lenght,path,part_name)
+    chords(single_note,type,length,path,complexity)
 VALUES
-     ('C','MAJ',4,'Files/audioFiles/Source/C/Major/Cmaj.wav','ZW'),
-     ('D','MAJ',4,'Files/audioFiles/Source/D/Major/Dmaj.wav','ZW'),
-     ('C','MAJ',4,'Files/audioFiles/Source/C/Major/Cmaj.wav','REF'),
-     ('D','MAJ',4,'Files/audioFiles/Source/D/Major/Dmaj.wav','REF'),
-     ('E','MAJ',4,'/resoureces/audioFiles/Source/C/Major/Cmaj.wav','ZW'),
-     ('G','MAJ9',4,'/resoureces/audioFiles/Source/C/Major/Cmaj.wav','REF'),
-     ('F','MAJ',4,'/resoureces/audioFiles/Source/C/Major/Cmaj.wav','REF');
+     ('C','MAJ',4,'Files/audioFiles/Source/C/Major/Cmaj.wav',4),
+     ('D','MAJ',4,'Files/audioFiles/Source/D/Major/Dmaj.wav',2),
+     ('C','MAJ',4,'Files/audioFiles/Source/C/Major/Cmaj.wav',3),
+     ('D','MAJ',4,'Files/audioFiles/Source/D/Major/Dmaj.wav',2);
 
 
 INSERT INTO
@@ -22,15 +19,3 @@ VALUES
     -- java_lover@example.com / javaiscool
     ('Marek', 'Zalewski', 'java_lover@example.com', '{argon2}$argon2id$v=19$m=4096,t=3,p=1$YBBBwx+kfrNgczYDcLlWYA$LEPgdtfskoobyFtUWTMejaE5SBRyieHYbiE5ZmFKE7I','USER');
 
---INSERT INTO
---    user_role (name, description)
---VALUES
---    ('ADMIN', 'Ma dostęp do wszystkiego'),
---    ('USER', 'Dostęp tylko do odczytu');
---
---INSERT INTO
---    user_roles (user_id, role_id)
---VALUES
---    (1, 1),
---    (2, 2),
---    (3, 2);

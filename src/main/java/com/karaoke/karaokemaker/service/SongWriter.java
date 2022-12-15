@@ -1,10 +1,10 @@
-package com.karaoke.karaokemaker.song.service;
+package com.karaoke.karaokemaker.service;
 
 
 
 
-import com.karaoke.karaokemaker.chord.model.Chord;
-import com.karaoke.karaokemaker.song.model.Song;
+import com.karaoke.karaokemaker.model.Chord;
+import com.karaoke.karaokemaker.model.Song;
 import org.springframework.stereotype.Service;
 
 import javax.sound.sampled.AudioFileFormat;
@@ -17,27 +17,21 @@ import java.io.SequenceInputStream;
 import java.util.List;
 
 @Service
-public class SongGenerator {
+public class SongWriter {
 
-    SongService songService;
-
-    public SongGenerator(SongService songService) {
-        this.songService = songService;
-    }
 
     String pathFinalSong = "Files\\finalSong.wav";
-
 
     AudioInputStream sound1;
     AudioInputStream sound2;
     AudioInputStream appendedFiles;
 
 
-    public void generateSong(Song song) throws UnsupportedAudioFileException, IOException {
+    public void writeSong(Song song) throws UnsupportedAudioFileException, IOException {
 
         System.out.println("zapisuje utwor");
 
-        List<Chord> chords = songService.readChordsFromDataBase(song);
+        List<Chord> chords = song.getChords();
 
 
         int songLenght = chords.size();
@@ -45,12 +39,12 @@ public class SongGenerator {
         for (int i = 1; i < songLenght ; i++) {
 
             if (i == 1) {
-                sound1 = pickChord(chords.get(0));
+                sound1 = pickChordSound(chords.get(0));
             } else {
-                sound1 = pickTempFile(i-1);
+                sound1 = pickTempSoundFile(i-1);
             }
 
-            sound2 = pickChord(chords.get(i));
+            sound2 = pickChordSound(chords.get(i));
 
             appendedFiles = new AudioInputStream(new SequenceInputStream(sound1, sound2), sound1.getFormat(), sound1.getFrameLength() + sound2.getFrameLength());
 
@@ -77,12 +71,12 @@ public class SongGenerator {
         AudioSystem.write(appendedFiles, AudioFileFormat.Type.WAVE, new File("Files\\tmpAudio" + i + ".wav"));
     }
 
-    AudioInputStream pickChord(Chord chord) throws UnsupportedAudioFileException, IOException {
+    AudioInputStream pickChordSound(Chord chord) throws UnsupportedAudioFileException, IOException {
 //        return AudioSystem.getAudioInputStream(new File(chord.getPath()));
         return AudioSystem.getAudioInputStream(new File(chord.getPath()));
     }
 
-    AudioInputStream pickTempFile (int i) throws UnsupportedAudioFileException, IOException {
+    AudioInputStream pickTempSoundFile(int i) throws UnsupportedAudioFileException, IOException {
         return AudioSystem.getAudioInputStream(new File("Files\\tmpAudio" + (i) + ".wav"));
     }
 

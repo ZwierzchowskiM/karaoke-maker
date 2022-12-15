@@ -18,7 +18,7 @@
         <ul class="navbar-nav mr-auto">
             <!--            <li class="nav-item" th:class="${#httpServletRequest.requestURI.contains('home')} ? 'nav-link active' : 'nav-link'">-->
             <li class="nav-item" th:class="${activePage == 'songs'} ? 'nav-item active' : 'nav-item'">
-                <a class="nav-link" th:href="@{/songs}">Songs<span class="sr-only">(current)</span></a>
+                <a class="nav-link" th:href="@{/song/library}">Songs<span class="sr-only">(current)</span></a>
             </li>
             <!--            <li class="nav-item" th:class="${#httpServletRequest.requestURI.contains('contact')} ? 'nav-link active' : 'nav-link'">-->
             <li class="nav-item" th:class="${activePage == 'info'} ? 'nav-item active' : 'nav-item'">
@@ -28,7 +28,7 @@
                 <a class="nav-link" th:href="@{/admin}">Users</a>
             </li>
             <li class="nav-item" th:class="${activePage == 'info'} ? 'nav-item active' : 'nav-item'">
-                <a class="nav-link" th:href="@{/song-create}">Create Song</a>
+                <a class="nav-link" th:href="@{/song/compose}">Create Song</a>
             </li>
         </ul>
     </div>

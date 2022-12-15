@@ -16,14 +16,7 @@
            th:text="|Wyloguj się ${#authentication.name}|"
            th:href="@{/logout}">Wyloguj się John</a>
         <img src="/images/karaoke_logo.png" alt="kod">
-        <h2>Dodaj utwor</h2>
-            <form method="post" action="/songs/save">
-                 <label>
-                 Treść:
-                 <textarea name="name" placeholder="Tytuł utworu..." rows="1" cols="30"></textarea>
-                </label>
-                 <button type="submit">Zapisz</button>
-            </form>
+
         <p><a href="/songs">Lista utworów</a></p>
     </main>
 
