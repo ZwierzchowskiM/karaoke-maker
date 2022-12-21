@@ -1,12 +1,15 @@
 package com.karaoke.karaokemaker.controllers;
 
-import com.karaoke.karaokemaker.model.ChordRequest;
+
+import com.karaoke.karaokemaker.model.Request;
 import com.karaoke.karaokemaker.model.Song;
 import com.karaoke.karaokemaker.repositories.SongRepository;
 import com.karaoke.karaokemaker.service.SongService;
+//import org.ehcache.CacheManager;
+//import org.ehcache.config.builders.CacheManagerBuilder;
+//import org.ehcache.xml.XmlConfiguration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -14,11 +17,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 class SongController {
@@ -29,10 +31,10 @@ class SongController {
 
     public SongController(SongRepository songRepository, SongService songService) {
         this.songRepository = songRepository;
-        this.songService= songService;
+        this.songService = songService;
+
     }
 
-    @Transactional
     @GetMapping ("/song/library")
     public String getSongs(Model model) {
 
@@ -60,16 +62,13 @@ class SongController {
     }
 
 
-//
 
 
-
-    @PostMapping("/song/save")
-    public String saveSong(@RequestParam String name) {
+    @PostMapping("/song/library")
+    @ResponseBody
+    public Song saveSong(@RequestParam String name) {
         Song songToSave = new Song(name);
-        songService.saveSong(songToSave);
-
-        return "redirect:/song/library";
+        return songService.saveSong(songToSave);
 
     }
 
@@ -81,9 +80,72 @@ class SongController {
     }
 
 
+    @RequestMapping(value = "/song/compose/generate", method = RequestMethod.POST, consumes="application/json", produces = "text/plain")
+//    @RequestMapping(value = "/song/compose/generate", method = RequestMethod.POST, produces = "text/plain")
+    @ResponseBody
+    public ResponseEntity<Song> generateSong(@RequestBody Request request) {
+
+        System.out.println("Tworze utwór: ");
+        System.out.println(request.getName());
+        Song generatedSong = new Song();
+        try {
+           generatedSong =  songService.generateSong(request);
+        } catch (UnsupportedAudioFileException | IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println(Arrays.toString(request.getChords()));
+
+
+        URI savedSongUri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{uuid}")
+                .buildAndExpand(generatedSong.getUuid())
+                .toUri();
+        return ResponseEntity.created(savedSongUri).body(generatedSong);
+
+//        return "redirect:/song/library";
+
+    }
+
+
+    @GetMapping("/song/{uuid}")
+    @ResponseBody
+    public Song getSongFromCache(@PathVariable String uuid) {
+
+        UUID songUuid = UUID.fromString(uuid);
+        songService.checkCash(songUuid);
+        return songService.getFromCache(songUuid);
+    }
 
 
 
+    @PostMapping("/song/new")
+    @ResponseBody
+    public Song postSong() {
+        return songService.putSongToCache();
+    }
+
+
+
+//    @GetMapping("/{uuid}")
+//    @Cacheable(value= "songs", key="#uuid")
+//    public String getSong(@PathVariable UUID uuid) {
+//        log.info(">> User Controller: get user by id: " + id);
+//        return userService.getUserById(id);
+//    }
+
+
+
+//    @PostMapping("/song/save")
+//    public String saveSong(@RequestParam String name) {
+//        Song songToSave = new Song(name);
+//        songService.saveSong(songToSave);
+//
+//        return "redirect:/song/library";
+//
+//    }
+
+//--- tworzy URL
 //    @RequestMapping(value = "/song/compose/generate", method = RequestMethod.POST, consumes="application/json", produces = "application/json")
 //    @ResponseBody
 //    public ResponseEntity<Song> generateSong(@RequestBody ChordRequest[] chords) {
@@ -105,32 +167,26 @@ class SongController {
 //
 //    }
 
-//@RequestMapping(value = "/song/compose/generate", method = RequestMethod.POST, consumes="application/json", produces = "application/json")
-//    @ResponseBody
-//    public List<String> generateSong(@RequestBody ChordRequest[] chords) {
-//        List<String> response = new ArrayList<>();
-//        for (ChordRequest chord: chords) {
-//            response.add("Saved chord: " + chord);
+
+
+//--- /przekieroanie na dany url
+//        Note noteToSave = new Note(id, note);
+//        boolean saved = noteService.save(noteToSave);
+//        if (saved) {
+//            return UriComponentsBuilder
+//                    .fromPath("redirect:note") //ścieżka bazowa
+//                    .queryParam("id", id) //dodajemy parametr ?id=XYZ
+//                    .build().toString();
+//        } else {
+//            return "redirect:duplicate";
 //        }
-//        return response;
-//    }
-
-
-    @RequestMapping(value = "/song/compose/generate", method = RequestMethod.POST, consumes="application/json", produces = "application/json")
-    @ResponseBody
-    public ChordRequest[] generateSong(@RequestBody ChordRequest[] chords) {
-
-        System.out.println(Arrays.toString(chords));
-        return chords;
-    }
-
 
 
 
 
 
 //
-//    //        zwraca obiekt json z szystkimi songami
+//---  zwraca obiekt json z szystkimi songami
 //    @Transactional
 //    @ResponseBody
 //    @GetMapping("/test")
@@ -142,19 +198,7 @@ class SongController {
 //    }
 //
 
-
-
-    //    @Transactional
-//    @GetMapping("/home")
-//    public String home(Model model) {
-//
-//        return "index";
-//    }
-
-
-
-
-///// zwraca kod odpowiedzei Created 201 -- nie działa przez formularz
+//--- zwraca kod odpowiedzei Created 201 -- nie działa przez formularz
 //    @PostMapping("/saveform")
 //    @ResponseStatus(HttpStatus.CREATED)
 //    public void saveSongfromForm(@RequestParam String name) {
@@ -163,7 +207,7 @@ class SongController {
 //
 //    }
 
-
+//--- replace Song
 //    @PutMapping("/{id}")
 //    ResponseEntity<?> replaceSong(@PathVariable Long id, @RequestBody Song song) {
 //        return songService.replaceSong(id, song)

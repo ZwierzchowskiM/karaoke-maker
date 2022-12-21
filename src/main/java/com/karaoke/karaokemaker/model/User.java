@@ -24,7 +24,7 @@ public class User {
     private String lastName;
     @Email
     private String email;
-    @OneToMany
+    @OneToMany(mappedBy= "user")
     private List<Song> songs = new ArrayList<>();
     @NotNull
     @Size(min = 4)

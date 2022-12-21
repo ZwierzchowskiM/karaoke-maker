@@ -1,14 +1,12 @@
-spring:
-  h2:
-    console:
-      enabled:true
-  datasource:
-    url: jdbc:h2:mem:test
-  jpa:
-    show-sql: true
-    defer-datasource-initialization: true
-#  security: ignored=/**
-  context:
-    annotation-config
-
-
+#spring:
+#  h2:
+#    console:
+#      enabled:true
+#  datasource:
+#    url: jdbc:h2:mem:test
+#  jpa:
+#    show-sql: true
+#    defer-datasource-initialization: true
+#  context:
+#    annotation-config
+#

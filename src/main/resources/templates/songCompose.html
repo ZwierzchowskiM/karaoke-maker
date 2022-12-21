@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl"  xmlns:th="http://www.thymeleaf.org"
-<!--      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"-->
-<!--      layout:decorate="~{fragments/layout}">-->
+`      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">`
 
 <head>
     <h1>Compose Song </h1>
@@ -10,131 +10,31 @@
 
 
 <body>
+
+
 <main layout:fragment="content">
-<input type="text" id="member" name="member" value="" placeholder="Number of chords">
-<a href="#" id="filldetails" onclick="addFields()">Generate</a>
 
 
-<form id="form" method="post" action="/song/compose/generate">
+    <input type="text" id="songnameid" name="songnameid" value="" placeholder="Song name">
+    <input type="text" id="member" name="member" value="" placeholder="Number of chords">
+    <button type="button" id="filldetails"  th:onclick="addFields()">Generate</button>
 
-</form>
+
+
+    <form id="form" method="post" action="/song/compose/generate" name="form">
+    </form>
+
+    <button type="button" id="senddetails"  th:onclick="sendForm()" hidden>Send Form</button>
+
+
+
+
+    <script type="text/javascript" th:src="@{/js/addform.js}"></script>
+    <script type="text/javascript" th:src="@{/js/sendform.js}"></script>
+
+
 </main>
 </body>
-
-<script type='text/javascript'>
-        function addFields(){
-            // Generate a dynamic number of inputs
-            var number = document.getElementById("member").value;
-            // Get the element where the inputs will be added to
-            var container = document.getElementById("form");
-            // Remove every children it had before
-             while (container.hasChildNodes()) {
-                 container.removeChild(container.lastChild);
-            }
-            for (i=0;i<number;i++){
-                // Append a node with a random text
-                container.appendChild(document.createTextNode("Chord " + (i+1)+" "));
-                // Create an <input> element, set its type and name attributes
-                var singleNote = document.createElement("input");
-                singleNote.type = "text";
-                singleNote.name = "singleNote";
-                singleNote.id="singleNote"+i
-                singleNote.placeholder="Single Note"
-                container.appendChild(singleNote);
-
-                var type = document.createElement("input");
-                type.type = "text";
-                type.name = "type";
-                type.id="type"+i
-                type.placeholder="Type"
-                container.appendChild(type);
-
-                var length = document.createElement("input");
-                length.type = "number";
-                length.name = "length";
-                length.id="length"+i
-                length.placeholder="Length"
-                container.appendChild(length);
-
-                var complexity = document.createElement("input");
-                complexity.type = "number";
-                complexity.name = "complexity";
-                complexity.id="complexity"+i
-                complexity.placeholder="Complexity"
-                container.appendChild(complexity);
-
-                // Append a line break
-                container.appendChild(document.createElement("br"));
-            }
-
-            var button = document.createElement("input");
-                button.type = "submit";
-                button.value = "Generate Song";
-                // type.id="type"+i
-                // type.placeholder="Type"
-                container.appendChild(button);
-
-        }
-     </script>
-
-
-<script  type='text/javascript'>
-    var form = document.getElementById('form')
-    form.addEventListener('submit',function(e) {
-
-
-        e.preventDefault()
-
-
-        var number = document.getElementById("member").value
-
-
-        function getData() {
-
-            chord_data = [];
-
-
-            for (let index = 0; index < number; index++) {
-                item = {};
-
-                var singleNote ='singleNote'
-                var type = 'type'
-                var length ='length'
-                var complexity = 'complexity'
-                item[singleNote]  = document.getElementById('singleNote'+index).value;
-                item[type]  = document.getElementById('type'+index).value;
-                item[length]  = document.getElementById('length'+index).value;
-                item[complexity]  = document.getElementById('complexity'+index).value;
-
-                chord_data.push(item)
-            }
-
-
-            return chord_data
-
-        }
-
-        const obj = getData();
-
-        fetch("/song/compose/generate", {
-            method: 'POST',
-            body:JSON.stringify(obj),
-            headers: {
-                    "Content-Type": "application/json;charset=UTF-8"
-            }
-        })
-            .then((response) => {
-                    return response.json()
-            })
-            .then((data) => {
-                console.log(data)
-            })
-
-})
-
-
-
-    </script>
 
 
 </html>

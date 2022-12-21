@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pl"  xmlns:th="http://www.thymeleaf.org"
+      `      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{fragments/layout}">`
+
+<head>
+    <h1>Compose Song </h1>
+
+</head>
+
+
+<body>
+
+
+<main layout:fragment="content">
+
+    <button th:onclick="play()">Play Audio</button>
+
+
+    <script type="text/javascript" th:src="@{/js/playAudio.js}"></script>
+
+</main>
+</body>
+
+
+</html>
