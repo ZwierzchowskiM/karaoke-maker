@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Controller
+@CrossOrigin
 class SongController {
 
     SongRepository songRepository;
@@ -44,6 +45,8 @@ class SongController {
         return "songLibrary";
     }
 
+
+
     @GetMapping("/song/compose")
     public String compose(Model model) {
         return "songCompose";
@@ -51,24 +54,17 @@ class SongController {
 
 
 
-    @PostMapping("/song/savesongentity")
-    ResponseEntity<Song> saveSongEntity(@RequestBody Song song) {
-        Song savedSong = songService.saveSong(song);
-        URI savedSongUri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(savedSong.getId())
-                .toUri();
-        return ResponseEntity.created(savedSongUri).body(savedSong);
-    }
 
 
 
-
-    @PostMapping("/song/library")
-    @ResponseBody
-    public Song saveSong(@RequestParam String name) {
+    @PostMapping("/song/library/add")
+//    @ResponseBody
+    public String saveSong(@RequestParam String name) {
         Song songToSave = new Song(name);
-        return songService.saveSong(songToSave);
+        songService.saveSong(songToSave);
+//        return songService.saveSong(songToSave);
+
+        return "redirect:/song/library";
 
     }
 
@@ -80,13 +76,17 @@ class SongController {
     }
 
 
-    @RequestMapping(value = "/song/compose/generate", method = RequestMethod.POST, consumes="application/json", produces = "text/plain")
-//    @RequestMapping(value = "/song/compose/generate", method = RequestMethod.POST, produces = "text/plain")
+    @RequestMapping(value = "/song/compose/generate", method = RequestMethod.POST, consumes="application/json", produces = "application/json")
+//    @RequestMapping(value = "/song/compose/generate", method = RequestMethod.POST, consumes="application/json")
     @ResponseBody
+
     public ResponseEntity<Song> generateSong(@RequestBody Request request) {
+//    public String generateSong(@RequestBody Request request) {
 
         System.out.println("Tworze utwór: ");
         System.out.println(request.getName());
+        System.out.println("Akordy to: ");
+        System.out.println(request.getChords());
         Song generatedSong = new Song();
         try {
            generatedSong =  songService.generateSong(request);
@@ -94,13 +94,14 @@ class SongController {
             e.printStackTrace();
         }
 
-        System.out.println(Arrays.toString(request.getChords()));
+//        System.out.println(Arrays.toString(request.getChords()));
 
 
         URI savedSongUri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{uuid}")
                 .buildAndExpand(generatedSong.getUuid())
                 .toUri();
+        System.out.println(savedSongUri);
         return ResponseEntity.created(savedSongUri).body(generatedSong);
 
 //        return "redirect:/song/library";
@@ -118,12 +119,34 @@ class SongController {
     }
 
 
-
+// umieszczenie song w cache
     @PostMapping("/song/new")
     @ResponseBody
     public Song postSong() {
         return songService.putSongToCache();
     }
+
+
+    @ResponseBody
+    @GetMapping("song/allsongs")
+
+    public List<Song> getAllSongs(Model model) {
+
+        List<Song> songs = (List<Song>) songRepository.findAll();
+
+        return songs;
+    }
+
+//
+//    @PostMapping("/song/savesongentity")
+//    ResponseEntity<Song> saveSongEntity(@RequestBody Song song) {
+//        Song savedSong = songService.saveSong(song);
+//        URI savedSongUri = ServletUriComponentsBuilder.fromCurrentRequest()
+//                .path("/{id}")
+//                .buildAndExpand(savedSong.getId())
+//                .toUri();
+//        return ResponseEntity.created(savedSongUri).body(savedSong);
+//    }
 
 
 
@@ -185,18 +208,8 @@ class SongController {
 
 
 
-//
-//---  zwraca obiekt json z szystkimi songami
-//    @Transactional
-//    @ResponseBody
-//    @GetMapping("/test")
-//    public List<Song> getSongsTest(Model model) {
-//
-//        List<Song> songs = (List<Song>) songRepository.findAll();
-//
-//        return songs;
-//    }
-//
+
+
 
 //--- zwraca kod odpowiedzei Created 201 -- nie działa przez formularz
 //    @PostMapping("/saveform")

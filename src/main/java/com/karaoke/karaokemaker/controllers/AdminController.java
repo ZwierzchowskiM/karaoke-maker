@@ -20,8 +20,8 @@ class AdminController {
 
     @GetMapping
     String adminPanel(Model model) {
-        List<String> allUserEmails = userService.findAllUserEmails();
-        model.addAttribute("userEmails", allUserEmails);
+//        List<String> allUserEmails = userService.findAllUserEmails();
+//        model.addAttribute("userEmails", allUserEmails);
         return "admin";
     }
 

@@ -86,7 +86,7 @@ public class UserService {
         user.setEmail(registration.getEmail());
         String passwordHash = passwordEncoder.encode(registration.getPassword());
         user.setPassword(passwordHash);
-        user.setRole("USER");
+//        user.setRole("USER");
         userRepository.save(user);
     }
     }

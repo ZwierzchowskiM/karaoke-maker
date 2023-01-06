@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-//@RedisHash("Song")
 public class Song implements Serializable {
 
     @Id
@@ -21,8 +20,6 @@ public class Song implements Serializable {
     private Long Id;
     private String name;
 
-    @JsonIgnore //działa, ale nie wczytuje chords
-//
     @Fetch(FetchMode.JOIN)
     @OneToMany (cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "song_id")
