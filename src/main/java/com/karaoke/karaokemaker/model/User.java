@@ -1,6 +1,10 @@
 package com.karaoke.karaokemaker.model;
 
 import com.karaoke.karaokemaker.model.Song;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -11,7 +15,9 @@ import java.util.*;
 
 @Entity
 @Table(name = "users")
-public class User {
+@Setter
+@Getter
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,20 +31,12 @@ public class User {
     @Email
     private String email;
     @OneToMany(mappedBy= "user")
+//    @OneToMany
+//    @JoinColumn(name = "user_id")
     private List<Song> songs = new ArrayList<>();
-    @NotNull
-    @Size(min = 4)
+
     private String password;
-
     private String role = "USER";
-
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(
-//            name = "user_roles",
-//            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
-//    )
-//    private Set<UserRole> roles = new HashSet<>();
 
 
     public User() {
@@ -50,52 +48,51 @@ public class User {
         this.email = email;
     }
 
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long id) {
-        Id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
+    public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
         this.email = email;
+        this.password = password;
     }
 
-    public List<Song> getSongs() {
-        return songs;
-    }
-
-    public void setSongs(List<Song> songs) {
-        this.songs = songs;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 
     public String getPassword() {
         return password;
     }
+
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }
+
     public String getRole() {
         return role;
     }
@@ -104,11 +101,8 @@ public class User {
     }
 
 
-//    public Set<UserRole> getRoles() {
-//        return roles;
-//    }
-//
-//    public void setRoles(Set<UserRole> roles) {
-//        this.roles = roles;
-//    }
+
+
+
+
 }

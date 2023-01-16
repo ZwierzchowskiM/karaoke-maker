@@ -15,11 +15,6 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/userform")
-    String home(Model model) {
-        model.addAttribute("user", new User());
-        return "userform";
-    }
 
 //        @PostMapping("/register")
 //        String register(@Valid User user, BindingResult bindingResult) {
@@ -31,9 +26,6 @@ public class UserController {
 //            }
 //        }
 
-        @GetMapping("/success")
-        String success() {
-            return "redirect:/";
-        }
+
 
 }

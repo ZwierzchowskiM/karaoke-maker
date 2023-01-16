@@ -1,7 +1,10 @@
 package com.karaoke.karaokemaker.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -13,6 +16,9 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
+@Getter
+@Setter
+@RequiredArgsConstructor
 public class Song implements Serializable {
 
     @Id
@@ -22,102 +28,34 @@ public class Song implements Serializable {
 
     @Fetch(FetchMode.JOIN)
     @OneToMany (cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+//    @OneToMany
     @JoinColumn(name = "song_id")
     private List<Chord> chords = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     User user;
+//     private Long userId;
 
     String path;
     UUID uuid;
 
 
-    public Song() {
-    }
 
-    public Song(String name, List<Chord> chords, User user, String path, UUID uuid) {
-        this.name = name;
-        this.chords = chords;
-        this.user = user;
-        this.path = path;
-        this.uuid = uuid;
-    }
 
     public Song(String name) {
         this.name = name;
     }
-
-    public Song(String name, List<Chord> chords) {
-        this.name = name;
-        this.chords = chords;
-    }
-
 
     public Song(String name, UUID uuid) {
         this.name = name;
         this.uuid = uuid;
     }
 
-    public Song(String name, List<Chord> chords, User user) {
+    public Song(String name, List<Chord> chords) {
         this.name = name;
         this.chords = chords;
-        this.user = user;
-    }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Chord> getChords() {
-        return chords;
-    }
-
-    public void setChords(List<Chord> chords) {
-        this.chords = chords;
-    }
-
-
-    public Long getId() {
-        return Id;
-    }
-
-    public void setId(Long id) {
-        Id = id;
-    }
-
-
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public UUID getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
-    }
-
-    public void addBar(Chord chord) {
-        this.chords.add(chord);
     }
 
 
@@ -127,7 +65,6 @@ public class Song implements Serializable {
                 "Id=" + Id + "\n" +
                 ", name='" + name + "\n" +
                 ", chords=" + chords+ "\n" +
-                ", user=" + user + "\n" +
                 ", path='" + path + "\n" +
                 ", uuid=" + uuid+ "\n"  +
                 '}';

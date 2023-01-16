@@ -1,12 +1,14 @@
 package com.karaoke.karaokemaker.service;
 
 import com.karaoke.karaokemaker.model.Chord;
-import com.karaoke.karaokemaker.model.ChordRequest;
+import com.karaoke.karaokemaker.dto.ChordDto;
+import com.karaoke.karaokemaker.model.Song;
 import com.karaoke.karaokemaker.repositories.ChordRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,31 +21,31 @@ public class ChordService {
     }
 
     @Transactional
-    public void add(Chord chord) {
+    public Chord add(Chord chord) {
         chordRepository.save(chord);
+        return chord;
     }
 
-    public Chord mapChordRequestToChord(ChordRequest userRequest) {
-        Chord chord = findChordByParameters(userRequest.getSingleNote(), userRequest.getType(),  userRequest.getComplexity(),userRequest.getLenght());
-        return chord;
+    public List<Chord> getChords() {
+        return chordRepository.findAll();
     }
 
 
     @Transactional
-    private Chord findChordByParameters(String note, String type, int complexity, int lenght) {
+    public void deleteChord(Long id) {
+            chordRepository.deleteById(id);
+    }
+
+
+    @Transactional
+    public Chord findChordByParameters(String note, String type, int complexity, int length) {
         List<Chord> chordList = chordRepository.findAll()
                 .stream()
                 .filter(chord -> chord.getSingleNote().equals(note))
                 .filter(chord -> chord.getType().equals(type))
                 .filter(chord -> chord.getComplexity() == complexity)
-                .filter(chord -> chord.getLenght() == lenght)
-                .map(chord -> new Chord(
-                        chord.getSingleNote(),
-                        chord.getType(),
-                        chord.getLenght(),
-                        chord.getPath(),
-                        chord.getComplexity()
-                )).collect(Collectors.toList());
+                .filter(chord -> chord.getLength() == length)
+                .collect(Collectors.toList());
 
         boolean empty = chordList.isEmpty();
 
@@ -52,6 +54,16 @@ public class ChordService {
         } else {
             return chordList.get(0);
         }
+    }
+
+
+    public Optional<Chord> replaceChord(Long chordId, Chord chord) {
+        if (!chordRepository.existsById(chordId)) {
+            return Optional.empty();
+        }
+        chord.setId(chordId);
+        Chord updatedEntity = chordRepository.save(chord);
+        return Optional.of(chord);
     }
 
 
