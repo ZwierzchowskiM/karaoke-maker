@@ -11,10 +11,11 @@ import java.util.UUID;
 
 public interface SongRepository extends CrudRepository<Song, Long> {
 
-//    @Query("select distinct c from Song c left join fetch c.chords")
     List<Song> findAllByName (String name);
     List<Song> findAll ();
     Optional<Song> findByUuid (UUID uuid);
+
+
 
 }
 

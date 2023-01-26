@@ -17,66 +17,83 @@ import java.util.List;
 @Service
 public class SongWriter {
 
-    AudioInputStream sound1;
-    AudioInputStream sound2;
-    AudioInputStream appendedFiles;
+    private static final int FIRST_SONG_BAR = 0;
+    AudioInputStream firstSongFragment=null;
+    AudioInputStream secondSongFragment=null;
+    AudioInputStream appendedSongFragments;
+    int actualFragment;
 
+    public void writeSong(Song song) throws UnsupportedAudioFileException, IOException {
 
-    public String writeSong(Song song) throws UnsupportedAudioFileException, IOException {
-
-        System.out.println("zapisuje utwor");
-        String pathFinalSong = "Files\\" + song.getName() + ".wav";
-
+        String pathFinalSong = song.getPath();
         List<Chord> chords = song.getChords();
+        int numberOfSongFragments = chords.size();
 
-        for (int i = 1; i < chords.size(); i++) {
+        for (actualFragment = 0; actualFragment < numberOfSongFragments; actualFragment++) {
+            writeAppendedSongFragments(chords);
+            writeFile(numberOfSongFragments, pathFinalSong);
+            closeActiveSongFragments (firstSongFragment, secondSongFragment);
+            deleteTempFile();
+        }
+    }
 
-            if (i == 1) {
-                sound1 = pickChordSound(chords.get(0));
-            } else {
-                sound1 = pickTempSoundFile(i - 1);
-            }
+    private void deleteTempFile() {
+        if (actualFragment > 0) {
+            deleteTempSongFragment(actualFragment-1);
+        }
+    }
 
-            sound2 = pickChordSound(chords.get(i));
-            appendedFiles = new AudioInputStream(new SequenceInputStream(sound1, sound2), sound1.getFormat(), sound1.getFrameLength() + sound2.getFrameLength());
+    private void writeFile(int numberOfSongFragments, String pathFinalSong) throws IOException {
+        if (actualFragment < numberOfSongFragments - 1) {
+            writeTempSongFragment(appendedSongFragments, actualFragment);
+        } else {
+            writeFinalSong(appendedSongFragments, pathFinalSong);
+        }
+    }
 
-            if (i < chords.size() - 1) {
-                writeTempFile(i);
-            } else {
-                writeFinalSong(pathFinalSong);
-            }
+    private void writeAppendedSongFragments(List<Chord> chords ) throws UnsupportedAudioFileException, IOException {
 
-            sound1.close();
-            sound2.close();
-            deleteTempFile(i);
+        if (actualFragment == FIRST_SONG_BAR) {
+            firstSongFragment = getSingleChord(chords.get(FIRST_SONG_BAR));
+            appendedSongFragments = new AudioInputStream(firstSongFragment, firstSongFragment.getFormat(),
+                    firstSongFragment.getFrameLength());
+        } else {
+            firstSongFragment = pickTempSongFragment(actualFragment - 1);
+            secondSongFragment = getSingleChord(chords.get(actualFragment));
+            appendedSongFragments = new AudioInputStream(new SequenceInputStream(firstSongFragment, secondSongFragment),
+                    firstSongFragment.getFormat(), firstSongFragment.getFrameLength() + secondSongFragment.getFrameLength());
         }
 
-        System.out.println("gotowe");
-        return pathFinalSong;
-
     }
 
-
-    private void writeFinalSong(String pathFinalSong) throws IOException {
-        AudioSystem.write(appendedFiles, AudioFileFormat.Type.WAVE, new File(pathFinalSong));
+    private void closeActiveSongFragments(AudioInputStream firstSongFragment, AudioInputStream secondSongFragment) throws IOException {
+        if (firstSongFragment!=null) firstSongFragment.close();
+        if (secondSongFragment!=null) secondSongFragment.close();
     }
 
-    private void writeTempFile(int i) throws IOException {
-        AudioSystem.write(appendedFiles, AudioFileFormat.Type.WAVE, new File("Files\\tmpAudio" + i + ".wav"));
+    private void writeFinalSong(AudioInputStream appendedSongFragments, String pathFinalSong) throws IOException {
+        AudioSystem.write(appendedSongFragments, AudioFileFormat.Type.WAVE, new File(pathFinalSong));
     }
 
-    AudioInputStream pickChordSound(Chord chord) throws UnsupportedAudioFileException, IOException {
+    private void writeTempSongFragment(AudioInputStream appendedSongFragments, int i) throws IOException {
+        AudioSystem.write(appendedSongFragments, AudioFileFormat.Type.WAVE, new File("Files\\tmpAudio" + i + ".wav"));
+    }
+
+    AudioInputStream getSingleChord(Chord chord) throws UnsupportedAudioFileException, IOException {
+
         return AudioSystem.getAudioInputStream(new File(chord.getPath()));
+
     }
 
-    AudioInputStream pickTempSoundFile(int i) throws UnsupportedAudioFileException, IOException {
+    AudioInputStream pickTempSongFragment(int i) throws UnsupportedAudioFileException, IOException {
         return AudioSystem.getAudioInputStream(new File("Files\\tmpAudio" + (i) + ".wav"));
     }
 
-    private void deleteTempFile(int i) {
-        File f = new File("Files\\tmpAudio" + (i - 1) + ".wav");
+    private void deleteTempSongFragment(int i) {
+        File f = new File("Files\\tmpAudio" + (i) + ".wav");
         f.delete();
     }
+
 
 
 }

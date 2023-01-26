@@ -24,7 +24,7 @@ class CustomUserDetailsService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException(String.format("User with email %s not found", username)));
     }
 
-    private UserDetails createUserDetails(com.karaoke.karaokemaker.model.User credentials) {
+    private UserDetails createUserDetails( com.karaoke.karaokemaker.model.User credentials) {
         return User.builder()
                 .username(credentials.getEmail())
                 .password(credentials.getPassword())

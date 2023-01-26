@@ -1,15 +1,15 @@
 package com.karaoke.karaokemaker.service;
 
+import com.karaoke.karaokemaker.enums.ChordType;
+import com.karaoke.karaokemaker.enums.Complexity;
+import com.karaoke.karaokemaker.enums.Length;
+import com.karaoke.karaokemaker.enums.SingleNote;
 import com.karaoke.karaokemaker.model.Chord;
-import com.karaoke.karaokemaker.dto.ChordDto;
-import com.karaoke.karaokemaker.model.Song;
 import com.karaoke.karaokemaker.repositories.ChordRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class ChordService {
@@ -22,12 +22,15 @@ public class ChordService {
 
     @Transactional
     public Chord add(Chord chord) {
-        chordRepository.save(chord);
-        return chord;
+        return chordRepository.save(chord);
     }
 
     public List<Chord> getChords() {
         return chordRepository.findAll();
+    }
+
+    public Optional<Chord> getSingleChord(Long id) {
+        return chordRepository.findById(id);
     }
 
 
@@ -38,14 +41,13 @@ public class ChordService {
 
 
     @Transactional
-    public Chord findChordByParameters(String note, String type, int complexity, int length) {
+    public Chord findChordByParameters(SingleNote note, ChordType type, Complexity complexity, Length length) {
         List<Chord> chordList = chordRepository.findAll()
                 .stream()
                 .filter(chord -> chord.getSingleNote().equals(note))
                 .filter(chord -> chord.getType().equals(type))
-                .filter(chord -> chord.getComplexity() == complexity)
-                .filter(chord -> chord.getLength() == length)
-                .collect(Collectors.toList());
+                .filter(chord -> chord.getComplexity().equals(complexity))
+                .filter(chord -> chord.getLength().equals(length)).toList();
 
         boolean empty = chordList.isEmpty();
 
@@ -63,7 +65,7 @@ public class ChordService {
         }
         chord.setId(chordId);
         Chord updatedEntity = chordRepository.save(chord);
-        return Optional.of(chord);
+        return Optional.of(updatedEntity);
     }
 
 

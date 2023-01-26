@@ -1,10 +1,7 @@
 package com.karaoke.karaokemaker.service;
 
 import com.karaoke.karaokemaker.dto.ChordDto;
-import com.karaoke.karaokemaker.dto.SongDto;
 import com.karaoke.karaokemaker.model.Chord;
-import com.karaoke.karaokemaker.model.Song;
-import com.karaoke.karaokemaker.repositories.ChordRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +17,7 @@ public class ChordDtoMapper {
 
     public List<Chord> mapToChords(List<ChordDto> chordsDto) {
         return chordsDto.stream()
-                .map(chord -> mapToChord(chord))
+                .map(this::mapToChord)
                 .toList();
     }
 

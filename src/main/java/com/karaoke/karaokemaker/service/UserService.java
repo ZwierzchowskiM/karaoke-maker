@@ -1,5 +1,6 @@
 package com.karaoke.karaokemaker.service;
 
+import com.karaoke.karaokemaker.dto.UserRegistrationDto;
 import com.karaoke.karaokemaker.model.User;
 import com.karaoke.karaokemaker.repositories.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -45,7 +46,9 @@ public class UserService {
         }
     }
 
-
+    public List<User> findUsers() {
+        return (List<User>) userRepository.findAll();
+    }
 
     public List<String> findAllUserEmails() {
         return userRepository.findAllUsersByRole(USER_ROLE)
@@ -64,6 +67,8 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
+
+
     @Transactional
     public void deleteUserByEmail(String email) {
         if (isCurrentUserAdmin()) {
@@ -71,24 +76,60 @@ public class UserService {
         }
     }
 
-        private boolean isCurrentUserAdmin() {
-            return SecurityContextHolder.getContext()
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    private boolean isCurrentUserAdmin() {
+        return SecurityContextHolder.getContext()
                     .getAuthentication()
                     .getAuthorities().stream()
                     .anyMatch(authority -> authority.getAuthority().equals(ADMIN_AUTHORITY));
-        }
+    }
+
+    public Long currentUserId(){
+
+//        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+//        Long userId = findCredentialsByEmail(userName).get().getId();
+
+        return 1L;
+    }
+    public String currentUserName(){
+        return SecurityContextHolder.getContext().getAuthentication().getName();
+    }
+
 
     @Transactional
-    public void register(User registration) {
-        User user = new User();
-        user.setFirstName(registration.getFirstName());
-        user.setLastName(registration.getLastName());
-        user.setEmail(registration.getEmail());
+    public User register(UserRegistrationDto registration) {
+        User savedUser = new User();
+        savedUser.setFirstName(registration.getFirstName());
+        savedUser.setLastName(registration.getLastName());
+        savedUser.setEmail(registration.getEmail());
         String passwordHash = passwordEncoder.encode(registration.getPassword());
-        user.setPassword(passwordHash);
-//        user.setRole("USER");
-        userRepository.save(user);
+        savedUser.setPassword(passwordHash);
+        savedUser.setRole(registration.getRole());
+        userRepository.save(savedUser);
+        return savedUser;
     }
+
+
+    public Optional<Object> replaceUser(Long id, UserRegistrationDto userDto) {
+
+        if (!userRepository.existsById(id)) {
+            return Optional.empty();
+        }
+        User modifiedUser = userRepository.findById(id).orElseThrow();
+        modifiedUser.setFirstName(userDto.getFirstName());
+        modifiedUser.setLastName(userDto.getLastName());
+        modifiedUser.setEmail(userDto.getEmail());
+
+        User updatedEntity = userRepository.save(modifiedUser);
+        return Optional.of(updatedEntity);
+
     }
+
+
+
+}
 
 

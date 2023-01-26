@@ -3,7 +3,6 @@ package com.karaoke.karaokemaker.service;
 import com.karaoke.karaokemaker.dto.SongDto;
 import com.karaoke.karaokemaker.model.Song;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -13,7 +12,7 @@ public class SongDtoMapper {
     }
 
 
-    public static List<SongDto> mapToSongDtos(List<Song> songs) {
+    public static List<SongDto> mapToSongDtosList(List<Song> songs) {
         return songs.stream()
                 .map(song -> mapToSongDto(song))
                 .toList();
@@ -23,7 +22,6 @@ public class SongDtoMapper {
         return SongDto.builder()
                 .id(song.getId())
                 .name(song.getName())
-                .uuid(song.getUuid())
                 .build();
     }
 
