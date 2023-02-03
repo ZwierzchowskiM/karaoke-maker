@@ -6,16 +6,15 @@ import com.karaoke.karaokemaker.model.*;
 import com.karaoke.karaokemaker.repositories.SongRepository;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
-
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
-
 import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.File;
 import java.io.IOException;
-
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
 
@@ -23,17 +22,16 @@ import java.util.*;
 public class SongService {
 
     SongRepository songRepository;
-    SongWriter songWriter;
     ChordService chordService;
     CacheManager cacheManager;
     ChordDtoMapper chordDtoMapper;
     UserService userService;
 
 
-    public SongService(SongRepository songRepository, SongWriter songWriter, ChordService chordService,
+    public SongService(SongRepository songRepository, ChordService chordService,
                        CacheManager cacheManager, ChordDtoMapper chordDtoMapper, UserService userService) {
         this.songRepository = songRepository;
-        this.songWriter = songWriter;
+
         this.chordService = chordService;
         this.cacheManager = cacheManager;
         this.chordDtoMapper = chordDtoMapper;
@@ -42,50 +40,79 @@ public class SongService {
 
     @Transactional
     public Song saveSong(Song song) {
-        Song savedSong = songRepository.save(song);
-        return savedSong;
+        return songRepository.save(song);
     }
 
     @Transactional
     @CachePut(cacheNames = "Songs", key = "#result.uuid")
-    public Song generateSong(SongRequestDto songRequest) throws UnsupportedAudioFileException, IOException {
+    public Song saveSong(SongRequestDto songRequest) throws UnsupportedAudioFileException, IOException {
 
         Song newSong = new Song();
 
         List<Chord> songChords = chordDtoMapper.mapToChords(List.of(songRequest.getChordDtos()));
         newSong.setChords(songChords);
         newSong.setName(songRequest.getSongName());
-        String songPath = "Files\\" + userService.currentUserName() + "\\" + newSong.getName() + ".wav";
-        newSong.setPath(songPath);
         newSong.setUuid(UUID.randomUUID());
         newSong.setUserId(userService.currentUserId());
-
-
-        songWriter.writeSong(newSong);
-
 
         return newSong;
 
     }
 
+    public String generateSong(Song song, String format) throws UnsupportedAudioFileException, IOException {
+
+        Writer writer;
+        String userName = userService.currentUserName();
+        String directory = "Files\\" + userName;
+        checkDirectory(directory);
+
+        writer = switch (format) {
+            case "WAV" -> new SongWriterWav();
+            case "TEXT" -> new SongWriterText();
+            default -> null;
+        };
+
+        return writer.writeSong(song, directory);
+
+    }
+
+    public boolean checkIsFilePresent(String path) {
+        if (path == null) {
+            return false;
+        }
+        File tmpDir = new File(path);
+        return tmpDir.exists();
+    }
+
+
+    private void checkDirectory(String directory) throws IOException {
+        if (!Files.isDirectory(Paths.get(directory))) {
+            Files.createDirectories(Paths.get(directory));
+        }
+    }
+
+
     public Optional<Song> getSingleSong(Long id) {
-        Long userId = userService.currentUserId();
         Optional<Song> song = songRepository.findById(id);
-        return song;
+        if (song.isEmpty()) {
+            return Optional.empty();
+        }
+        Long userId = userService.currentUserId();
+        Long songUserId = song.get().getUserId();
+        if (Objects.equals(songUserId, userId))
+            return song;
+        else
+            return Optional.empty();
     }
 
     public List<Song> getUserSongs() {
         Long userId = userService.currentUserId();
-        List<Song> filteredSongs = songRepository.findAll().stream().filter(song -> Objects.equals(song.getUserId(), userId)).toList();
-        return filteredSongs;
+        return songRepository.findAll().stream().filter(song -> Objects.equals(song.getUserId(), userId)).toList();
     }
-
 
     public List<Song> getAllSongs() {
         return songRepository.findAll();
     }
-
-
 
 
     @Transactional
@@ -97,11 +124,8 @@ public class SongService {
         List<Chord> songChords = chordDtoMapper.mapToChords(List.of(songDto.getChordDtos()));
         replacedSong.setChords(songChords);
         replacedSong.setName(songDto.getSongName());
-        String songPath = "Files\\" + userService.currentUserName() + "\\" + replacedSong.getName() + ".wav";
-        replacedSong.setPath(songPath);
         replacedSong.setUuid(UUID.randomUUID());
         replacedSong.setUserId(userService.currentUserId());
-        songWriter.writeSong(replacedSong);
         replacedSong.setId(songId);
 
         Song updatedEntity = songRepository.save(replacedSong);
@@ -115,10 +139,6 @@ public class SongService {
     }
 
 
-
-
-
-//
     @Transactional
     @Cacheable(cacheNames = "Songs", key = "#uuid")
     public Song getFromCache(String uuid) {
@@ -131,7 +151,7 @@ public class SongService {
             return null;
         } else {
             System.out.println("exist in the cache");
-            Song song = songCache.get(songUuid,Song.class);
+            Song song = songCache.get(songUuid, Song.class);
 
             return song;
 
@@ -139,13 +159,13 @@ public class SongService {
     }
 
 
+    public String getSongPath(Song song, String format) {
+        return switch (format) {
+            case "WAV" -> song.getPathWavFile();
+            case "TEXT" -> song.getPathTextFile();
+            default -> null;
+        };
 
-    public String getSongPath(@PathVariable Long id) {
-
-        Song songToDownload = songRepository.findById(id).orElseThrow();
-        String songPath = songToDownload.getPath();
-
-        return songPath;
     }
 
 

@@ -1,5 +1,5 @@
 package com.karaoke.karaokemaker.enums;
 
 public enum SingleNote {
-    C, D, E, F, G, A, B
+    C, Db, D, E, Eb, F, Gb, G, A, Ab, B, Bb
 }

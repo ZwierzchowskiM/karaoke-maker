@@ -1,5 +1,0 @@
-http://localhost:8080/swagger-ui
-
-http://localhost:8080/swagger-ui/#/
-
-Files/audioFiles/Source/C/Major/Cmaj.wav

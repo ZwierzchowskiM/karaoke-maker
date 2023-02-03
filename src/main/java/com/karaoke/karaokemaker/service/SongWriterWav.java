@@ -1,10 +1,10 @@
 package com.karaoke.karaokemaker.service;
 
 
+import com.karaoke.karaokemaker.exceptions.AudioFileNotFoundException;
 import com.karaoke.karaokemaker.model.Chord;
 import com.karaoke.karaokemaker.model.Song;
 import org.springframework.stereotype.Service;
-
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -15,7 +15,7 @@ import java.io.SequenceInputStream;
 import java.util.List;
 
 @Service
-public class SongWriter {
+public class SongWriterWav implements Writer {
 
     private static final int FIRST_SONG_BAR = 0;
     AudioInputStream firstSongFragment=null;
@@ -23,9 +23,11 @@ public class SongWriter {
     AudioInputStream appendedSongFragments;
     int actualFragment;
 
-    public void writeSong(Song song) throws UnsupportedAudioFileException, IOException {
+    public String writeSong(Song song, String directory) throws UnsupportedAudioFileException, IOException {
 
-        String pathFinalSong = song.getPath();
+
+        String pathFinalSong= directory + "\\" + song.getName() + ".wav";
+        song.setPathWavFile(pathFinalSong);
         List<Chord> chords = song.getChords();
         int numberOfSongFragments = chords.size();
 
@@ -35,6 +37,8 @@ public class SongWriter {
             closeActiveSongFragments (firstSongFragment, secondSongFragment);
             deleteTempFile();
         }
+
+        return pathFinalSong;
     }
 
     private void deleteTempFile() {
@@ -79,9 +83,13 @@ public class SongWriter {
         AudioSystem.write(appendedSongFragments, AudioFileFormat.Type.WAVE, new File("Files\\tmpAudio" + i + ".wav"));
     }
 
-    AudioInputStream getSingleChord(Chord chord) throws UnsupportedAudioFileException, IOException {
+    AudioInputStream getSingleChord(Chord chord)  {
 
-        return AudioSystem.getAudioInputStream(new File(chord.getPath()));
+        try {
+            return AudioSystem.getAudioInputStream(new File(chord.getPath()));
+        } catch (UnsupportedAudioFileException | IOException e) {
+            throw new AudioFileNotFoundException(chord.getSingleNote(),chord.getType(),chord.getComplexity(),chord.getLength());
+        }
 
     }
 

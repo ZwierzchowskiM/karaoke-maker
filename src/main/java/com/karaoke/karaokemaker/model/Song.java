@@ -29,8 +29,9 @@ public class Song implements Serializable {
     )
     private List<Chord> chords = new ArrayList<>();
     private Long userId;
-    private String path;
     private UUID uuid;
+    private String pathWavFile;
+    private String pathTextFile;
 
 
 

@@ -1,6 +1,5 @@
 package com.karaoke.karaokemaker.config;
 
-
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.security.authentication.AuthenticationManager;

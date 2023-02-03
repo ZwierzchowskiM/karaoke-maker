@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/chords")
+@RequestMapping("/api/v1/chords")
 public class ChordController {
     ChordRepository chordRepository;
     ChordService chordService;

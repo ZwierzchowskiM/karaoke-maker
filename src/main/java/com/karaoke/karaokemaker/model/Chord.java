@@ -1,11 +1,11 @@
 package com.karaoke.karaokemaker.model;
 
-import com.karaoke.karaokemaker.enums.ChordType;
-import com.karaoke.karaokemaker.enums.Complexity;
-import com.karaoke.karaokemaker.enums.Length;
-import com.karaoke.karaokemaker.enums.SingleNote;
+import com.karaoke.karaokemaker.enums.*;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.*;
 
 
@@ -13,6 +13,7 @@ import javax.persistence.*;
 @Table(name = "chords")
 @Getter
 @Setter
+@RequiredArgsConstructor
 public class Chord {
 
     @Id
@@ -26,17 +27,15 @@ public class Chord {
     private Length length;
     @Enumerated(EnumType.STRING)
     private Complexity complexity;
+    @Enumerated(EnumType.STRING)
+    private BottomNote bottomNote;
+
     private String path;
 
-    public Chord(Long id, SingleNote singleNote, ChordType type, Length length, Complexity complexity, String path) {
-        this.id = id;
-        this.singleNote = singleNote;
-        this.type = type;
-        this.length = length;
-        this.complexity = complexity;
-        this.path = path;
+    @Override
+    public String toString() {
+        return "Chord: " + singleNote + type + " bottom note: " + bottomNote +
+                " length: " + length + " complexity: " + complexity;
     }
 
-    public Chord() {
-    }
 }

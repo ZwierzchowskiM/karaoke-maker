@@ -1,6 +1,7 @@
 package com.karaoke.karaokemaker.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import javax.persistence.*;
@@ -14,6 +15,7 @@ import java.util.*;
 @Table(name = "users")
 @Setter
 @Getter
+@NoArgsConstructor
 @ToString
 public class User {
 
@@ -30,21 +32,9 @@ public class User {
     private String email;
     @OneToMany(cascade = CascadeType.REMOVE)
     private List<Song> songs = new ArrayList<>();
-
-
     private String role;
-
     private String password;
 
-
-    public User() {
-    }
-
-    public User(String firstName, String lastName, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-    }
 
     public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;

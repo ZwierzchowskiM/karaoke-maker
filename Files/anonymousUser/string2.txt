@@ -1,0 +1,2 @@
+Chord: CMAJ bottom note: ROOT length: FULL_BAR complexity: VERSE_1
+Chord: CMAJ bottom note: ROOT length: FULL_BAR complexity: VERSE_1
