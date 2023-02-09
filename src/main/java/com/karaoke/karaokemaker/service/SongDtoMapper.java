@@ -14,7 +14,7 @@ public class SongDtoMapper {
 
     public static List<SongDto> mapToSongDtosList(List<Song> songs) {
         return songs.stream()
-                .map(song -> mapToSongDto(song))
+                .map(SongDtoMapper::mapToSongDto)
                 .toList();
     }
 

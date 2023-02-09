@@ -2,6 +2,7 @@ package com.karaoke.karaokemaker.service;
 
 
 import com.karaoke.karaokemaker.dto.SongRequestDto;
+import com.karaoke.karaokemaker.exceptions.AudioFileNotFoundException;
 import com.karaoke.karaokemaker.model.*;
 import com.karaoke.karaokemaker.repositories.SongRepository;
 import org.springframework.cache.Cache;
@@ -45,7 +46,7 @@ public class SongService {
 
     @Transactional
     @CachePut(cacheNames = "Songs", key = "#result.uuid")
-    public Song saveSong(SongRequestDto songRequest) throws UnsupportedAudioFileException, IOException {
+    public Song saveSong(SongRequestDto songRequest) {
 
         Song newSong = new Song();
 
@@ -59,7 +60,7 @@ public class SongService {
 
     }
 
-    public String generateSong(Song song, String format) throws UnsupportedAudioFileException, IOException {
+    public String generateSong(Song song, String format) throws UnsupportedAudioFileException, IOException, AudioFileNotFoundException {
 
         Writer writer;
         String userName = userService.currentUserName();
@@ -74,14 +75,6 @@ public class SongService {
 
         return writer.writeSong(song, directory);
 
-    }
-
-    public boolean checkIsFilePresent(String path) {
-        if (path == null) {
-            return false;
-        }
-        File tmpDir = new File(path);
-        return tmpDir.exists();
     }
 
 
@@ -105,9 +98,15 @@ public class SongService {
             return Optional.empty();
     }
 
+//    public List<Song> getUserSongs() {
+//        Long userId = userService.currentUserId();
+//        List <Song> songs = songRepository.findAll();
+//        return songs.stream().filter(song -> Objects.equals(song.getUserId(), userId)).toList();
+//    }
+
     public List<Song> getUserSongs() {
         Long userId = userService.currentUserId();
-        return songRepository.findAll().stream().filter(song -> Objects.equals(song.getUserId(), userId)).toList();
+        return songRepository.findAllByUserId(userId);
     }
 
     public List<Song> getAllSongs() {
@@ -116,7 +115,7 @@ public class SongService {
 
 
     @Transactional
-    public Optional<Song> replaceSong(Long songId, SongRequestDto songDto) throws UnsupportedAudioFileException, IOException {
+    public Optional<Song> replaceSong(Long songId, SongRequestDto songDto) {
         if (!songRepository.existsById(songId)) {
             return Optional.empty();
         }

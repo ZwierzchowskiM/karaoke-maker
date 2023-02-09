@@ -1,6 +1,8 @@
 package com.karaoke.karaokemaker.controllers;
 
 import com.karaoke.karaokemaker.dto.UserRegistrationDto;
+import com.karaoke.karaokemaker.exceptions.ResourceNotFoundException;
+import com.karaoke.karaokemaker.model.Song;
 import com.karaoke.karaokemaker.model.User;
 import com.karaoke.karaokemaker.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -28,15 +30,18 @@ public class UserController {
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     ResponseEntity<?> deleteUser(@PathVariable Long id) {
+
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
     ResponseEntity<?> putUser(@PathVariable Long id, @RequestBody UserRegistrationDto user) {
-        return userService.replaceUser(id, user)
-                .map(c -> ResponseEntity.noContent().build())
-                .orElse(ResponseEntity.notFound().build());
+
+        User modifiedUser = userService.replaceUser(id, user)
+        .orElseThrow(() -> new ResourceNotFoundException("Song with ID :" + id + " Not Found"));
+
+        return ResponseEntity.ok().body(modifiedUser);
     }
 
     @GetMapping("/all")

@@ -2,6 +2,7 @@ package com.karaoke.karaokemaker.service;
 
 import com.karaoke.karaokemaker.model.Chord;
 import com.karaoke.karaokemaker.model.Song;
+
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -13,15 +14,15 @@ public class SongWriterText implements Writer {
     @Override
     public String writeSong(Song song, String directory) throws UnsupportedAudioFileException, IOException {
 
-        String pathFinalSong= directory + "\\" + song.getName() + ".txt";
-        song.setPathWavFile(pathFinalSong);
+        String pathFinalSong = directory + "\\" + song.getName() + ".txt";
+        song.setPathTextFile(pathFinalSong);
         List<Chord> chords = song.getChords();
 
         BufferedWriter bw = null;
 
         StringBuilder content = new StringBuilder();
 
-        for (int i = 0; i < chords.size() ; i++) {
+        for (int i = 0; i < chords.size(); i++) {
 
             content.append(chords.get(i).toString());
             content.append(System.lineSeparator());
@@ -30,8 +31,6 @@ public class SongWriterText implements Writer {
         String finalContent = content.toString();
 
         try {
-
-
             File file = new File(pathFinalSong);
             if (!file.exists()) {
                 file.createNewFile();

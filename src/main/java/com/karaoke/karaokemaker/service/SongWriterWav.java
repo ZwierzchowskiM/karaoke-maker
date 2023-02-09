@@ -23,7 +23,7 @@ public class SongWriterWav implements Writer {
     AudioInputStream appendedSongFragments;
     int actualFragment;
 
-    public String writeSong(Song song, String directory) throws UnsupportedAudioFileException, IOException {
+    public String writeSong(Song song, String directory) throws UnsupportedAudioFileException, IOException, AudioFileNotFoundException {
 
 
         String pathFinalSong= directory + "\\" + song.getName() + ".wav";
@@ -83,7 +83,7 @@ public class SongWriterWav implements Writer {
         AudioSystem.write(appendedSongFragments, AudioFileFormat.Type.WAVE, new File("Files\\tmpAudio" + i + ".wav"));
     }
 
-    AudioInputStream getSingleChord(Chord chord)  {
+    AudioInputStream getSingleChord(Chord chord) throws AudioFileNotFoundException   {
 
         try {
             return AudioSystem.getAudioInputStream(new File(chord.getPath()));

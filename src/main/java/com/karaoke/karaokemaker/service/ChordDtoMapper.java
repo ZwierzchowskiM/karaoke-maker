@@ -22,7 +22,8 @@ public class ChordDtoMapper {
 
 
     public Chord mapToChord(ChordDto chordDto) {
-        Chord chord = chordService.findChordByParameters(chordDto.getSingleNote(), chordDto.getType(), chordDto.getComplexity(), chordDto.getLength());
+        Chord chord = chordService.findChordByParameters(chordDto.getSingleNote(),
+                chordDto.getType(), chordDto.getComplexity(), chordDto.getLength());
         return chord;
 
     }

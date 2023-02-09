@@ -1,6 +1,7 @@
 package com.karaoke.karaokemaker.service;
 
 import com.karaoke.karaokemaker.dto.UserRegistrationDto;
+import com.karaoke.karaokemaker.exceptions.ResourceNotFoundException;
 import com.karaoke.karaokemaker.model.User;
 import com.karaoke.karaokemaker.repositories.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -47,21 +48,10 @@ public class UserService {
     }
 
     public List<User> findUsers() {
+
         return (List<User>) userRepository.findAll();
     }
 
-    public List<String> findAllUserEmails() {
-        return userRepository.findAllUsersByRole(USER_ROLE)
-                .stream()
-                .map(User::getEmail)
-                .toList();
-    }
-    public List<String> findAllUsers() {
-        return userRepository.findAllUsersByRole(USER_ROLE)
-                .stream()
-                .map(User::getEmail)
-                .toList();
-    }
 
     public Optional<User> findCredentialsByEmail(String email) {
         return userRepository.findByEmail(email);
@@ -94,7 +84,9 @@ public class UserService {
 
         return 1L;
     }
+
     public String currentUserName(){
+
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
@@ -113,12 +105,13 @@ public class UserService {
     }
 
 
-    public Optional<Object> replaceUser(Long id, UserRegistrationDto userDto) {
+    public Optional<User> replaceUser(Long id, UserRegistrationDto userDto) {
 
         if (!userRepository.existsById(id)) {
             return Optional.empty();
         }
-        User modifiedUser = userRepository.findById(id).orElseThrow();
+        User modifiedUser = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Song with ID :" + id + " Not Found"));
         modifiedUser.setFirstName(userDto.getFirstName());
         modifiedUser.setLastName(userDto.getLastName());
         modifiedUser.setEmail(userDto.getEmail());
@@ -128,6 +121,18 @@ public class UserService {
 
     }
 
+//    public List<String> findAllUserEmails() {
+//        return userRepository.findAllUsersByRole(USER_ROLE)
+//                .stream()
+//                .map(User::getEmail)
+//                .toList();
+//    }
+//    public List<String> findAllUsers() {
+//        return userRepository.findAllUsersByRole(USER_ROLE)
+//                .stream()
+//                .map(User::getEmail)
+//                .toList();
+//    }
 
 
 }

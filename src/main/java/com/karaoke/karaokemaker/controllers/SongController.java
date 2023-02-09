@@ -4,6 +4,7 @@ package com.karaoke.karaokemaker.controllers;
 import com.karaoke.karaokemaker.dto.SongDto;
 import com.karaoke.karaokemaker.dto.SongRequestDto;
 import com.karaoke.karaokemaker.exceptions.AudioFileNotFoundException;
+import com.karaoke.karaokemaker.exceptions.ResourceNotFoundException;
 import com.karaoke.karaokemaker.model.Song;
 import com.karaoke.karaokemaker.repositories.SongRepository;
 import com.karaoke.karaokemaker.service.SongService;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;
@@ -39,18 +41,11 @@ class SongController {
     }
 
 
-    @PostMapping("/generate")
+    @PostMapping("/create")
     public ResponseEntity<?> postSong(@RequestBody SongRequestDto request) {
 
 
-        Song generatedSong = new Song();
-        try {
-            generatedSong = songService.saveSong(request);
-        } catch (UnsupportedAudioFileException | IOException | AudioFileNotFoundException e) {
-            System.out.println(e.getMessage());
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-
-        }
+        Song generatedSong = songService.saveSong(request);
 
         URI savedSongUri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{uuid}")
@@ -61,9 +56,9 @@ class SongController {
         return ResponseEntity.created(savedSongUri).body(generatedSong);
     }
 
-    @GetMapping("/generate/{uuid}")
+    @GetMapping("/create/{uuid}/generate")
     @ResponseBody
-    public ResponseEntity<?> getSongPreviewDownload(@PathVariable String uuid) throws IOException, UnsupportedAudioFileException {
+    public ResponseEntity<?> getSongPreviewGenerateFile(@PathVariable String uuid) {
 
         Song generatedSong = songService.getFromCache(uuid);
 
@@ -71,18 +66,30 @@ class SongController {
             return ResponseEntity.notFound().build();
         }
 
-        String songPath;
-        songPath = songService.getSongPath(generatedSong, "WAV");
-
-        if (songService.checkIsFilePresent(songPath)) {
-            songPath = generatedSong.getPathWavFile();
-        } else {
+        String songPath = null;
+        try {
             songPath = songService.generateSong(generatedSong,"WAV");
+        } catch (UnsupportedAudioFileException | IOException e) {
+            e.printStackTrace();
         }
+
+        return ResponseEntity.ok()
+                .body(songPath);
+    }
+
+    @GetMapping("/create/download")
+    @ResponseBody
+    public ResponseEntity<?> getSongPreviewDownload(@PathVariable String songPath) {
 
 
         File downloadFile = new File(songPath);
-        InputStreamResource resource = new InputStreamResource(new FileInputStream(downloadFile));
+        InputStreamResource resource = null;
+        try {
+            resource = new InputStreamResource(new FileInputStream(downloadFile));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return ResponseEntity.notFound().build();
+        }
 
         HttpHeaders header = new HttpHeaders();
         header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + downloadFile.getName());
@@ -96,7 +103,7 @@ class SongController {
     }
 
 
-    @PostMapping("/generate/{uuid}/save")
+    @PostMapping("/create/{uuid}/save")
     @ResponseBody
     public ResponseEntity<?> postSongPreview(@PathVariable String uuid) {
 
@@ -110,41 +117,46 @@ class SongController {
 
 
     @GetMapping("/")
-    public ResponseEntity<List<SongDto>> getSongs() {
+    public ResponseEntity<List<SongDto>> getSongsList() {
         return ResponseEntity.ok(mapToSongDtosList(songService.getUserSongs()));
     }
 
     @GetMapping("/all")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<List<SongDto>> getAllSongs() {
+    public ResponseEntity<List<SongDto>> getAllSongsList() {
         return ResponseEntity.ok(mapToSongDtosList(songService.getAllSongs()));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getSingleSong(@PathVariable Long id) {
 
-        return songService.getSingleSong(id)
-                .map(c -> ResponseEntity.ok(c))
-                .orElse(ResponseEntity.notFound().build());
+        Song song = songService.getSingleSong(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Song with ID :" + id + " Not Found"));
+
+        return ResponseEntity.ok().body(song);
+
+//        return songService.getSingleSong(id)
+//                .map(c -> ResponseEntity.ok(c))
+//                .orElse(ResponseEntity.notFound().build());
 
     }
 
     @GetMapping(path = "/{id}/download")
-    public ResponseEntity<Resource> getSongDownload(@PathVariable Long id, @RequestParam String format) throws Exception {
+    public ResponseEntity<Resource> getSongDownload(@PathVariable Long id, @RequestParam String format) {
 
 
-        Song song = songService.getSingleSong(id).orElseThrow();
+        Song song = songService.getSingleSong(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Song with ID :" + id + " Not Found"));
+
         String songPath = songService.getSongPath(song, format);
-        String downloadPath;
-        //czy to jest potrzebne? czy od razu tworzyć nowy plik?
-//        if (songService.checkIsFilePresent(songPath)) {
-//            downloadPath = songPath;
-//        } else {
-//        }
-        downloadPath = songService.generateSong(song, format);
-        File downloadFile = new File(downloadPath);
-        InputStreamResource resource = new InputStreamResource(new FileInputStream(downloadFile));
 
+        File downloadFile = new File(songPath);
+        InputStreamResource resource = null;
+        try {
+            resource = new InputStreamResource(new FileInputStream(downloadFile));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         HttpHeaders header = new HttpHeaders();
         header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + downloadFile.getName());
@@ -157,28 +169,42 @@ class SongController {
     }
 
 
-    @PutMapping("/{id}")
-    ResponseEntity<?> putSong(@PathVariable Long id, @RequestBody SongRequestDto song) throws UnsupportedAudioFileException, IOException {
+    @GetMapping(path = "/{id}/generate")
+    public ResponseEntity<?> getSongGenerateFile(@PathVariable Long id, @RequestParam String format) {
 
 
-        Optional<Song> replacedSong = null;
+        Song song = songService.getSingleSong(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Song with ID :" + id + " Not Found"));
+        String songPath = null;
+
         try {
-            replacedSong = songService.replaceSong(id, song);
-
+            songPath = songService.generateSong(song, format);
         } catch (UnsupportedAudioFileException | IOException e) {
             e.printStackTrace();
-            return ResponseEntity.notFound().build();
         }
 
-
-        return replacedSong
-                .map(c -> ResponseEntity.noContent().build())
-                .orElse(ResponseEntity.notFound().build());
+        return ResponseEntity.ok().body(songPath);
     }
+
+
+    @PutMapping("/{id}")
+    ResponseEntity<?> putSong(@PathVariable Long id, @RequestBody SongRequestDto song)  {
+
+        Song replacedSong  = songService.replaceSong(id, song)
+                .orElseThrow(() -> new ResourceNotFoundException("Song with ID :" + id + " Not Found"));
+
+        return ResponseEntity.ok().body(replacedSong);
+    }
+
 
     @DeleteMapping("/{id}")
     ResponseEntity<?> deleteSong(@PathVariable Long id) {
+
+        if (songRepository.findById(id).isEmpty()) {
+            throw new ResourceNotFoundException("Song with ID :" + id + " Not Found");
+        }
         songService.deleteSong(id);
+
         return ResponseEntity.noContent().build();
     }
 

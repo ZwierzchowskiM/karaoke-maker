@@ -1,9 +1,7 @@
 package com.karaoke.karaokemaker.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -16,7 +14,9 @@ import java.util.*;
 @Setter
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @ToString
+@Builder
 public class User {
 
     @Id
@@ -36,12 +36,7 @@ public class User {
     private String password;
 
 
-    public User(String firstName, String lastName, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-    }
+
 
 
 }

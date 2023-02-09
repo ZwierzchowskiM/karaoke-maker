@@ -21,11 +21,11 @@ public class ChordService {
     }
 
     @Transactional
-    public Chord add(Chord chord) {
+    public Chord saveChord(Chord chord) {
         return chordRepository.save(chord);
     }
 
-    public List<Chord> getChords() {
+    public List<Chord> getAllChords() {
         return chordRepository.findAll();
     }
 
@@ -33,16 +33,16 @@ public class ChordService {
         return chordRepository.findById(id);
     }
 
-
     @Transactional
     public void deleteChord(Long id) {
             chordRepository.deleteById(id);
     }
 
-
+    // czy tutaj brać (0) element z listy???
     @Transactional
     public Chord findChordByParameters(SingleNote note, ChordType type, Complexity complexity, Length length) {
-        List<Chord> chordList = chordRepository.findAll()
+        List<Chord> chordList = (List<Chord>) chordRepository.findAll();
+        chordList = chordList
                 .stream()
                 .filter(chord -> chord.getSingleNote().equals(note))
                 .filter(chord -> chord.getType().equals(type))
