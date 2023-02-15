@@ -12,8 +12,6 @@ import java.util.UUID;
 public interface SongRepository extends CrudRepository<Song, Long> {
 
     List<Song> findAll ();
-    List<Song> findAllByName (String name);
-    Optional<Song> findByUuid (UUID uuid);
     List<Song> findAllByUserId (Long id);
 
 

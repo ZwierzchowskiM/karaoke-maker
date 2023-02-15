@@ -24,7 +24,7 @@ public class ChordController {
 
     @PostMapping("/add")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<Chord> postChord(@RequestBody Chord chord) {
+    public ResponseEntity<Chord> createChord(@RequestBody Chord chord) {
         return ResponseEntity.ok(chordService.saveChord(chord));
     }
 
@@ -57,7 +57,7 @@ public class ChordController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    ResponseEntity<?> putChord(@PathVariable Long id, @RequestBody Chord chord) {
+    ResponseEntity<?> updateChord(@PathVariable Long id, @RequestBody Chord chord) {
         Chord updatedChord = chordService.replaceChord(id, chord)
                 .orElseThrow(() -> new ResourceNotFoundException("Chord with ID :" + id + " Not Found"));
 

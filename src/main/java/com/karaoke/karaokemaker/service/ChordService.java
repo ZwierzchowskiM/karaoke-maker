@@ -1,9 +1,6 @@
 package com.karaoke.karaokemaker.service;
 
-import com.karaoke.karaokemaker.enums.ChordType;
-import com.karaoke.karaokemaker.enums.Complexity;
-import com.karaoke.karaokemaker.enums.Length;
-import com.karaoke.karaokemaker.enums.SingleNote;
+import com.karaoke.karaokemaker.enums.*;
 import com.karaoke.karaokemaker.model.Chord;
 import com.karaoke.karaokemaker.repositories.ChordRepository;
 import org.springframework.stereotype.Service;
@@ -40,18 +37,17 @@ public class ChordService {
 
     // czy tutaj brać (0) element z listy???
     @Transactional
-    public Chord findChordByParameters(SingleNote note, ChordType type, Complexity complexity, Length length) {
-        List<Chord> chordList = (List<Chord>) chordRepository.findAll();
+    public Chord findChordByParameters(SingleNote note, ChordType type, Complexity complexity, Length length, BassNote bassNote) {
+        List<Chord> chordList = chordRepository.findAll();
         chordList = chordList
                 .stream()
                 .filter(chord -> chord.getSingleNote().equals(note))
                 .filter(chord -> chord.getType().equals(type))
+                .filter(chord -> chord.getBassNote().equals(bassNote))
                 .filter(chord -> chord.getComplexity().equals(complexity))
                 .filter(chord -> chord.getLength().equals(length)).toList();
 
-        boolean empty = chordList.isEmpty();
-
-        if (empty) {
+        if (chordList.isEmpty()) {
             return null;
         } else {
             return chordList.get(0);

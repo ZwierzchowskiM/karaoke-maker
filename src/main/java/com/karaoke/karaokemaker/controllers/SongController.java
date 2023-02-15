@@ -9,6 +9,7 @@ import com.karaoke.karaokemaker.model.Song;
 import com.karaoke.karaokemaker.repositories.SongRepository;
 import com.karaoke.karaokemaker.service.SongService;
 import com.karaoke.karaokemaker.service.UserService;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.*;
@@ -42,7 +43,7 @@ class SongController {
 
 
     @PostMapping("/create")
-    public ResponseEntity<?> postSong(@RequestBody SongRequestDto request) {
+    public ResponseEntity<?> createSong(@RequestBody SongRequestDto request) {
 
 
         Song generatedSong = songService.saveSong(request);
@@ -56,9 +57,9 @@ class SongController {
         return ResponseEntity.created(savedSongUri).body(generatedSong);
     }
 
-    @GetMapping("/create/{uuid}/generate")
     @ResponseBody
-    public ResponseEntity<?> getSongPreviewGenerateFile(@PathVariable String uuid) {
+    @GetMapping("/preview/{uuid}/generate")
+    public ResponseEntity<?> generateSongWavPreview(@PathVariable String uuid) {
 
         Song generatedSong = songService.getFromCache(uuid);
 
@@ -73,14 +74,23 @@ class SongController {
             e.printStackTrace();
         }
 
+        generatedSong.setPathWavFile(songPath);
+
         return ResponseEntity.ok()
-                .body(songPath);
+                .body(generatedSong);
     }
 
-    @GetMapping("/create/download")
+    @GetMapping("/preview/{uuid}/download")
     @ResponseBody
-    public ResponseEntity<?> getSongPreviewDownload(@PathVariable String songPath) {
+    public ResponseEntity<?> downloadSongPreview(@PathVariable String uuid) {
 
+        Song generatedSong = songService.getFromCache(uuid);
+
+        if (generatedSong == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        String songPath = generatedSong.getPathWavFile();
 
         File downloadFile = new File(songPath);
         InputStreamResource resource = null;
@@ -103,9 +113,9 @@ class SongController {
     }
 
 
-    @PostMapping("/create/{uuid}/save")
+    @PostMapping("/preview/{uuid}/save")
     @ResponseBody
-    public ResponseEntity<?> postSongPreview(@PathVariable String uuid) {
+    public ResponseEntity<?> saveSongPreviewToDatabase(@PathVariable String uuid) {
 
         Song generatedSong = songService.getFromCache(uuid);
         if (generatedSong == null) {
@@ -135,14 +145,10 @@ class SongController {
 
         return ResponseEntity.ok().body(song);
 
-//        return songService.getSingleSong(id)
-//                .map(c -> ResponseEntity.ok(c))
-//                .orElse(ResponseEntity.notFound().build());
-
     }
 
     @GetMapping(path = "/{id}/download")
-    public ResponseEntity<Resource> getSongDownload(@PathVariable Long id, @RequestParam String format) {
+    public ResponseEntity<Resource> downloadSong(@PathVariable Long id, @RequestParam String format) {
 
 
         Song song = songService.getSingleSong(id)
@@ -170,7 +176,7 @@ class SongController {
 
 
     @GetMapping(path = "/{id}/generate")
-    public ResponseEntity<?> getSongGenerateFile(@PathVariable Long id, @RequestParam String format) {
+    public ResponseEntity<String> generateSongFile(@PathVariable Long id, @RequestParam String format) {
 
 
         Song song = songService.getSingleSong(id)
@@ -188,7 +194,7 @@ class SongController {
 
 
     @PutMapping("/{id}")
-    ResponseEntity<?> putSong(@PathVariable Long id, @RequestBody SongRequestDto song)  {
+    ResponseEntity<Song> updateSong(@PathVariable Long id, @RequestBody SongRequestDto song)  {
 
         Song replacedSong  = songService.replaceSong(id, song)
                 .orElseThrow(() -> new ResourceNotFoundException("Song with ID :" + id + " Not Found"));

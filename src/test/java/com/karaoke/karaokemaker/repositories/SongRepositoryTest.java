@@ -17,7 +17,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @DataJpaTest
 //@AutoConfigureTestDatabase(replace = NONE)
 @TestPropertySource(
-        locations = "classpath:application-integrationtest.properties")
+        locations = "classpath:application-integrationtest.yml")
 class SongRepositoryTest {
 
     @Autowired

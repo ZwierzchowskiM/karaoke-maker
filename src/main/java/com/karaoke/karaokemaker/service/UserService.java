@@ -53,10 +53,14 @@ public class UserService {
     }
 
 
+    public Optional<User> findUserById(Long id) {
+        return userRepository.findById(id);
+    }
+
+
     public Optional<User> findCredentialsByEmail(String email) {
         return userRepository.findByEmail(email);
     }
-
 
 
     @Transactional
@@ -72,12 +76,12 @@ public class UserService {
 
     private boolean isCurrentUserAdmin() {
         return SecurityContextHolder.getContext()
-                    .getAuthentication()
-                    .getAuthorities().stream()
-                    .anyMatch(authority -> authority.getAuthority().equals(ADMIN_AUTHORITY));
+                .getAuthentication()
+                .getAuthorities().stream()
+                .anyMatch(authority -> authority.getAuthority().equals(ADMIN_AUTHORITY));
     }
 
-    public Long currentUserId(){
+    public Long currentUserId() {
 
 //        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 //        Long userId = findCredentialsByEmail(userName).get().getId();
@@ -85,7 +89,7 @@ public class UserService {
         return 1L;
     }
 
-    public String currentUserName(){
+    public String currentUserName() {
 
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
@@ -120,19 +124,6 @@ public class UserService {
         return Optional.of(updatedEntity);
 
     }
-
-//    public List<String> findAllUserEmails() {
-//        return userRepository.findAllUsersByRole(USER_ROLE)
-//                .stream()
-//                .map(User::getEmail)
-//                .toList();
-//    }
-//    public List<String> findAllUsers() {
-//        return userRepository.findAllUsersByRole(USER_ROLE)
-//                .stream()
-//                .map(User::getEmail)
-//                .toList();
-//    }
 
 
 }

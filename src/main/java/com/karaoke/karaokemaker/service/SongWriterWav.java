@@ -18,10 +18,11 @@ import java.util.List;
 public class SongWriterWav implements Writer {
 
     private static final int FIRST_SONG_BAR = 0;
+    private static final String TEMP_FILE_PATH = "Files\\tmpAudio";
     AudioInputStream firstSongFragment=null;
     AudioInputStream secondSongFragment=null;
     AudioInputStream appendedSongFragments;
-    int actualFragment;
+
 
     public String writeSong(Song song, String directory) throws UnsupportedAudioFileException, IOException, AudioFileNotFoundException {
 
@@ -31,23 +32,23 @@ public class SongWriterWav implements Writer {
         List<Chord> chords = song.getChords();
         int numberOfSongFragments = chords.size();
 
-        for (actualFragment = 0; actualFragment < numberOfSongFragments; actualFragment++) {
-            writeAppendedSongFragments(chords);
-            writeFile(numberOfSongFragments, pathFinalSong);
+        for (int actualFragment = 0; actualFragment < numberOfSongFragments; actualFragment++) {
+            writeAppendedSongFragments(actualFragment,chords);
+            writeFile(actualFragment, numberOfSongFragments, pathFinalSong);
             closeActiveSongFragments (firstSongFragment, secondSongFragment);
-            deleteTempFile();
+            deleteTempFile(actualFragment);
         }
 
         return pathFinalSong;
     }
 
-    private void deleteTempFile() {
+    private void deleteTempFile(int actualFragment) {
         if (actualFragment > 0) {
             deleteTempSongFragment(actualFragment-1);
         }
     }
 
-    private void writeFile(int numberOfSongFragments, String pathFinalSong) throws IOException {
+    private void writeFile(int actualFragment, int numberOfSongFragments, String pathFinalSong) throws IOException {
         if (actualFragment < numberOfSongFragments - 1) {
             writeTempSongFragment(appendedSongFragments, actualFragment);
         } else {
@@ -55,7 +56,8 @@ public class SongWriterWav implements Writer {
         }
     }
 
-    private void writeAppendedSongFragments(List<Chord> chords ) throws UnsupportedAudioFileException, IOException {
+    private void writeAppendedSongFragments(int actualFragment, List<Chord> chords ) throws UnsupportedAudioFileException, IOException {
+
 
         if (actualFragment == FIRST_SONG_BAR) {
             firstSongFragment = getSingleChord(chords.get(FIRST_SONG_BAR));
@@ -80,7 +82,7 @@ public class SongWriterWav implements Writer {
     }
 
     private void writeTempSongFragment(AudioInputStream appendedSongFragments, int i) throws IOException {
-        AudioSystem.write(appendedSongFragments, AudioFileFormat.Type.WAVE, new File("Files\\tmpAudio" + i + ".wav"));
+        AudioSystem.write(appendedSongFragments, AudioFileFormat.Type.WAVE, new File(TEMP_FILE_PATH + i + ".wav"));
     }
 
     AudioInputStream getSingleChord(Chord chord) throws AudioFileNotFoundException   {
@@ -94,11 +96,11 @@ public class SongWriterWav implements Writer {
     }
 
     AudioInputStream pickTempSongFragment(int i) throws UnsupportedAudioFileException, IOException {
-        return AudioSystem.getAudioInputStream(new File("Files\\tmpAudio" + (i) + ".wav"));
+        return AudioSystem.getAudioInputStream(new File(TEMP_FILE_PATH + (i) + ".wav"));
     }
 
     private void deleteTempSongFragment(int i) {
-        File f = new File("Files\\tmpAudio" + (i) + ".wav");
+        File f = new File(TEMP_FILE_PATH + (i) + ".wav");
         f.delete();
     }
 

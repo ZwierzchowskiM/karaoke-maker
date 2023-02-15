@@ -1,0 +1,22 @@
+jwt:
+  expirationTime: 3600000
+  secret: asdsalqrk1232115dfas@!#!@sds
+spring:
+  cache:
+    jcache:
+      config: classpath:ehcache.xml
+  context: annotation-config
+  datasource:
+    url: jdbc:h2:mem:test
+  h2:
+    console:
+      enabled: true
+  jpa:
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+    show-sql: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher

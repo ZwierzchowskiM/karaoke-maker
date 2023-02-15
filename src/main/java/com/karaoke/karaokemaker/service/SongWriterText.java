@@ -2,8 +2,6 @@ package com.karaoke.karaokemaker.service;
 
 import com.karaoke.karaokemaker.model.Chord;
 import com.karaoke.karaokemaker.model.Song;
-
-import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -12,7 +10,7 @@ import java.util.List;
 
 public class SongWriterText implements Writer {
     @Override
-    public String writeSong(Song song, String directory) throws UnsupportedAudioFileException, IOException {
+    public String writeSong(Song song, String directory) {
 
         String pathFinalSong = directory + "\\" + song.getName() + ".txt";
         song.setPathTextFile(pathFinalSong);

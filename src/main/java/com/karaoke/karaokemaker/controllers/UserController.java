@@ -21,8 +21,25 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/{id}")
+    ResponseEntity<?> getUser(@PathVariable Long id) {
+
+        User user = userService.findUserById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Song with ID :" + id + " Not Found"));
+
+        return ResponseEntity.ok().body(user);
+    }
+
+    @GetMapping("/all")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<List<User>> getUsers() {
+
+        return ResponseEntity.ok (userService.findUsers());
+    }
+
+
     @PostMapping("/register")
-    ResponseEntity<User>  register(@RequestBody UserRegistrationDto registeredUser) {
+    ResponseEntity<User>  registerUser(@RequestBody UserRegistrationDto registeredUser) {
         return ResponseEntity.ok(userService.register(registeredUser));
     }
 
@@ -36,7 +53,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<?> putUser(@PathVariable Long id, @RequestBody UserRegistrationDto user) {
+    ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody UserRegistrationDto user) {
 
         User modifiedUser = userService.replaceUser(id, user)
         .orElseThrow(() -> new ResourceNotFoundException("Song with ID :" + id + " Not Found"));
@@ -44,12 +61,6 @@ public class UserController {
         return ResponseEntity.ok().body(modifiedUser);
     }
 
-    @GetMapping("/all")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<List<User>> getUsers() {
-
-        return ResponseEntity.ok (userService.findUsers());
-    }
 
 
 

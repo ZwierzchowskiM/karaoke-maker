@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -47,7 +48,7 @@ import static java.util.Collections.singletonList;
         return new Docket(DocumentationType. SWAGGER_2 )
                 .ignoredParameterTypes(UsernamePasswordAuthenticationToken.class)
                 .select()
-                .paths(PathSelectors. regex ( "^(?!/(error).*$).*$" ))
+                .apis(RequestHandlerSelectors.basePackage("com.karaoke.karaokemaker.controllers"))
                 .build()
                 .securitySchemes(singletonList(createSchema()))
                 .securityContexts(singletonList(createContext()));
