@@ -1,5 +1,6 @@
 package com.karaoke.karaokemaker.service;
 
+import com.karaoke.karaokemaker.enums.Length;
 import com.karaoke.karaokemaker.model.Chord;
 import com.karaoke.karaokemaker.repositories.ChordRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -88,7 +89,6 @@ class ChordServiceTest {
     }
 
 
-//save chord
     @Test
     public void whensaveChord_thensaveChord() {
         //given
@@ -105,30 +105,42 @@ class ChordServiceTest {
         assertThat(savedChord.getId()).isEqualTo(chord1.getId());
     }
 
+
+
+    @Test
+    void deleteChord() {
+        //given
+        Chord chord1 = new Chord();
+        chord1.setId(1L);
+        chordRepository.save(chord1);
+
+//        when(chordRepository.findById(1L)).thenReturn(Optional.of(chord1));
+        doNothing().when(chordRepository).deleteById(chord1.getId());
+
+        chordService.deleteChord(1L);
+
+        verify(chordRepository).deleteById(1L);
+    }
+
     @Test
     void replaceChord() {
+
+        //given
+        Chord chord1 = new Chord();
+        chord1.setId(1L);
+        chord1.setLength(Length.QUARTER_BAR);
+        chordRepository.save(chord1);
+
+        when(chordRepository.existsById(chord1.getId())).thenReturn(true);
+        when(chordRepository.save(chord1)).thenReturn(chord1);
+
+        chord1.setLength(Length.FULL_BAR);
+        Chord savedChord = chordRepository.save(chord1);
+        assertThat(savedChord.getLength()).isEqualTo(chord1.getLength());
+
+
     }
 
-//    nie działa
-//    @Test
-//    void deleteChord() {
-//        //given
-//        Chord chord1 = new Chord();
-//        chord1.setId(1L);
-//
-//        when(chordRepository.findById(1L)).thenReturn(Optional.of(chord1));
-//        doNothing().when(chordRepository).deleteById(chord1.getId());
-//
-//        chordService.deleteChord(1L);
-//
-//        verify(chordRepository).delete(chord1);
-//
-//    }
 
-    @Test
-    void findChordByParameters() {
-    }
-
-    //--------------replace chord
 
 }

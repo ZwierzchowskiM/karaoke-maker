@@ -2,8 +2,8 @@ package com.karaoke.karaokemaker.controllers;
 
 import com.karaoke.karaokemaker.dto.UserRegistrationDto;
 import com.karaoke.karaokemaker.exceptions.ResourceNotFoundException;
-import com.karaoke.karaokemaker.model.Song;
 import com.karaoke.karaokemaker.model.User;
+import com.karaoke.karaokemaker.repositories.UserRepository;
 import com.karaoke.karaokemaker.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,10 +16,13 @@ import java.util.List;
 public class UserController {
 
     UserService userService;
+    UserRepository userRepository;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
+        this.userRepository = userRepository;
     }
+
 
     @GetMapping("/{id}")
     ResponseEntity<?> getUser(@PathVariable Long id) {
@@ -30,7 +33,7 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<User>> getUsers() {
 
@@ -48,6 +51,10 @@ public class UserController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     ResponseEntity<?> deleteUser(@PathVariable Long id) {
 
+        if (userRepository.findById(id).isEmpty()) {
+            throw new ResourceNotFoundException("User with ID :" + id + " Not Found");
+        }
+
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
@@ -56,7 +63,7 @@ public class UserController {
     ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody UserRegistrationDto user) {
 
         User modifiedUser = userService.replaceUser(id, user)
-        .orElseThrow(() -> new ResourceNotFoundException("Song with ID :" + id + " Not Found"));
+        .orElseThrow(() -> new ResourceNotFoundException("User with ID :" + id + " Not Found"));
 
         return ResponseEntity.ok().body(modifiedUser);
     }

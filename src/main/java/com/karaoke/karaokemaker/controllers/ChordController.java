@@ -28,7 +28,7 @@ public class ChordController {
         return ResponseEntity.ok(chordService.saveChord(chord));
     }
 
-    @GetMapping("/all")
+    @GetMapping("/")
     public ResponseEntity<List<Chord>> getChords() {
         return ResponseEntity.ok(chordService.getAllChords());
     }
@@ -61,8 +61,7 @@ public class ChordController {
         Chord updatedChord = chordService.replaceChord(id, chord)
                 .orElseThrow(() -> new ResourceNotFoundException("Chord with ID :" + id + " Not Found"));
 
-
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(updatedChord);
     }
 
 }

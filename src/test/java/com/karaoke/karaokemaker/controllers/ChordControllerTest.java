@@ -36,8 +36,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.mockito.internal.verification.VerificationModeFactory;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Arrays;
 import java.util.List;
@@ -69,12 +67,12 @@ class ChordControllerTest {
 
         when(chordService.getSingleChord(chord.getId())).thenReturn(Optional.of(chord));
 
-        //when
+
         mockMvc.perform(get("/api/v1/chords/" + chord.getId()))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.path", Matchers.is("test/path")));
-        //then
+
 
     }
 
@@ -117,21 +115,19 @@ class ChordControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(3)))
-                .andExpect(jsonPath("$[0].id", is(1))).
-                andExpect(jsonPath("$[1].id", is(2)))
+                .andExpect(jsonPath("$[0].id", is(1)))
+                .andExpect(jsonPath("$[1].id", is(2)))
                 .andExpect(jsonPath("$[2].id", is(3)));
 
         verify(chordService, VerificationModeFactory.times(1)).getAllChords();
         reset(chordService);
 
-        //given
-        //then
 
     }
 
 
     @Test
-    public void deleteChordById_success() throws Exception {
+    public void givenChord_whendeleteChordById_thenReturnStatusNoContent() throws Exception {
         Chord chord1 = new Chord();
         chord1.setId(1L);
 
@@ -145,29 +141,26 @@ class ChordControllerTest {
     }
 
 
-//    // nie działa
-//    @Test
-//    public void updateChordRecord_success() throws Exception {
-//        Chord chord1 = new Chord();
-//        chord1.setId(1L);
-//        chord1.setLength(Length.QUARTER_BAR);
-//        Chord chord2 = new Chord();
-//        chord2.setId(2L);
-//        chord2.setLength(Length.FULL_BAR);
-//
-//
-//        when(chordService.replaceChord(chord1.getId(), chord2)).thenReturn(Optional.of(chord2));
-//
-//        MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.put("/api/v1/chords/" + chord1.getId())
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .accept(MediaType.APPLICATION_JSON)
-//                .content(asJsonString(chord2));
-//
-//        mockMvc.perform(mockRequest)
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$", notNullValue()))
-//                .andExpect(jsonPath("$.length", is("FULL_BAR")));
-//    }
+    @Test
+    public void updateChordRecord() throws Exception {
+        Chord chord1 = new Chord();
+        chord1.setId(1L);
+        chord1.setLength(Length.QUARTER_BAR);
+        Chord chord2 = new Chord();
+        chord2.setId(2L);
+        chord2.setLength(Length.FULL_BAR);
+
+
+        when(chordService.replaceChord(eq(chord1.getId()), Mockito.any())).thenReturn(Optional.of(chord2));
+
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .put("/api/v1/chords/" + chord1.getId())
+                        .content(asJsonString(chord2))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length", is("FULL_BAR")));
+    }
 
 
     public static String asJsonString(final Object obj) {
@@ -197,28 +190,3 @@ class ChordControllerTest {
 //    }
 
 
-//    Test
-//    public void updatePatientRecord_success() throws Exception {
-
-//        PatientRecord updatedRecord = PatientRecord.builder()
-//                .patientId(1l)
-//                .name("Rayven Zambo")
-//                .age(23)
-//                .address("Cebu Philippines")
-//                .build();
-//
-//        Mockito.when(patientRecordRepository.findById(RECORD_1.getPatientId())).thenReturn(Optional.of(RECORD_1));
-//        Mockito.when(patientRecordRepository.save(updatedRecord)).thenReturn(updatedRecord);
-//
-//        MockHttpServletRequestBuilder mockRequest = MockMvcRequestBuilders.post("/patient")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .accept(MediaType.APPLICATION_JSON)
-//                .content(this.mapper.writeValueAsString(updatedRecord));
-//
-//        mockMvc.perform(mockRequest)
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$", notNullValue()))
-//                .andExpect(jsonPath("$.name", is("Rayven Zambo")));
-//    }
-//
-//

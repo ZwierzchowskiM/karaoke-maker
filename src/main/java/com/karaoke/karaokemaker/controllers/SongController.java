@@ -3,13 +3,12 @@ package com.karaoke.karaokemaker.controllers;
 
 import com.karaoke.karaokemaker.dto.SongDto;
 import com.karaoke.karaokemaker.dto.SongRequestDto;
-import com.karaoke.karaokemaker.exceptions.AudioFileNotFoundException;
 import com.karaoke.karaokemaker.exceptions.ResourceNotFoundException;
 import com.karaoke.karaokemaker.model.Song;
 import com.karaoke.karaokemaker.repositories.SongRepository;
+import com.karaoke.karaokemaker.service.SongDtoMapper;
 import com.karaoke.karaokemaker.service.SongService;
 import com.karaoke.karaokemaker.service.UserService;
-import org.springframework.cache.annotation.CachePut;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.*;
@@ -23,9 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
-import static com.karaoke.karaokemaker.service.SongDtoMapper.mapToSongDtosList;
 
 @RestController
 @RequestMapping("/api/v1/songs")
@@ -34,19 +31,23 @@ class SongController {
     SongRepository songRepository;
     SongService songService;
     UserService userService;
+    SongDtoMapper songDtoMapper;
 
-    public SongController(SongRepository songRepository, SongService songService, UserService userService) {
+    public SongController(SongRepository songRepository, SongService songService, UserService userService, SongDtoMapper songDtoMapper) {
         this.songRepository = songRepository;
         this.songService = songService;
         this.userService = userService;
+        this.songDtoMapper = songDtoMapper;
     }
+
+
 
 
     @PostMapping("/create")
     public ResponseEntity<?> createSong(@RequestBody SongRequestDto request) {
 
 
-        Song generatedSong = songService.saveSong(request);
+        Song generatedSong = songService.createSong(request);
 
         URI savedSongUri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{uuid}")
@@ -128,17 +129,17 @@ class SongController {
 
     @GetMapping("/")
     public ResponseEntity<List<SongDto>> getSongsList() {
-        return ResponseEntity.ok(mapToSongDtosList(songService.getUserSongs()));
+        return ResponseEntity.ok(songDtoMapper.mapToSongDtosList(songService.getUserSongs()));
     }
 
-    @GetMapping("/all")
+    @GetMapping("/admin")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<SongDto>> getAllSongsList() {
-        return ResponseEntity.ok(mapToSongDtosList(songService.getAllSongs()));
+        return ResponseEntity.ok(songDtoMapper.mapToSongDtosList(songService.getAllSongs()));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getSingleSong(@PathVariable Long id) {
+    public ResponseEntity<?> getSong(@PathVariable Long id) {
 
         Song song = songService.getSingleSong(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Song with ID :" + id + " Not Found"));

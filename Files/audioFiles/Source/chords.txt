@@ -1,4 +1,0 @@
-C;CMAJ;C:\\KMAudioFiles\\Source\\C\\Major\\CMaj.wav
-G;GMAJ;C:\\KMAudioFiles\\Source\\G\\Major\\GMaj.wav
-D;DMAJ;C:\\KMAudioFiles\\Source\\D\\Major\\DMaj.wav
-E;EMIN;C:\\KMAudioFiles\\Source\\E\\Minor\\EMin.wav

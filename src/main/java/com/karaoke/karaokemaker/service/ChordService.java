@@ -1,6 +1,7 @@
 package com.karaoke.karaokemaker.service;
 
 import com.karaoke.karaokemaker.enums.*;
+import com.karaoke.karaokemaker.exceptions.ResourceNotFoundException;
 import com.karaoke.karaokemaker.model.Chord;
 import com.karaoke.karaokemaker.repositories.ChordRepository;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,6 @@ public class ChordService {
             chordRepository.deleteById(id);
     }
 
-    // czy tutaj brać (0) element z listy???
     @Transactional
     public Chord findChordByParameters(SingleNote note, ChordType type, Complexity complexity, Length length, BassNote bassNote) {
         List<Chord> chordList = chordRepository.findAll();
@@ -48,7 +48,8 @@ public class ChordService {
                 .filter(chord -> chord.getLength().equals(length)).toList();
 
         if (chordList.isEmpty()) {
-            return null;
+            throw new ResourceNotFoundException("Chord " + note + type +  " bass note: " + bassNote + " " + complexity
+                    + " " + length + " Not found!" );
         } else {
             return chordList.get(0);
         }

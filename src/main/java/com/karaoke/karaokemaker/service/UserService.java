@@ -63,13 +63,6 @@ public class UserService {
     }
 
 
-    @Transactional
-    public void deleteUserByEmail(String email) {
-        if (isCurrentUserAdmin()) {
-            userRepository.deleteByEmail(email);
-        }
-    }
-
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }

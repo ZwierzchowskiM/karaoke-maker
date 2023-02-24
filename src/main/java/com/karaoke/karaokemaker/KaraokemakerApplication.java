@@ -13,7 +13,7 @@ import java.util.UUID;
 @SpringBootApplication
 public class KaraokemakerApplication {
 
-	public static void main(String[] args) throws UnsupportedAudioFileException, IOException {
+	public static void main(String[] args)  {
 
 		ConfigurableApplicationContext context = SpringApplication.run(KaraokemakerApplication.class);
 

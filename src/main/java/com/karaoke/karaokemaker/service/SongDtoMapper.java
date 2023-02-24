@@ -12,7 +12,7 @@ public class SongDtoMapper {
     }
 
 
-    public static List<SongDto> mapToSongDtosList(List<Song> songs) {
+    public List<SongDto> mapToSongDtosList(List<Song> songs) {
         return songs.stream()
                 .map(SongDtoMapper::mapToSongDto)
                 .toList();

@@ -1,0 +1,364 @@
+{
+  "chordDtos": [
+    {
+      "bassNote": "ROOT",
+      "complexity": "SINGLE_CHORD",
+      "length": "HALF_BAR",
+      "singleNote": "D",
+      "type": "MAJ"
+    },
+    {
+      "bassNote": "THIRD",
+      "complexity": "SINGLE_CHORD",
+      "length": "HALF_BAR",
+      "singleNote": "A",
+      "type": "MAJ"
+    },
+    {
+      "bassNote": "ROOT",
+      "complexity": "SINGLE_CHORD",
+      "length": "FULL_BAR",
+      "singleNote": "B",
+      "type": "MIN"
+    },
+    {
+      "bassNote": "ROOT",
+      "complexity": "SINGLE_CHORD",
+      "length": "HALF_BAR",
+      "singleNote": "G",
+      "type": "MAJ"
+    },
+    {
+      "bassNote": "THIRD",
+      "complexity": "SINGLE_CHORD",
+      "length": "HALF_BAR",
+      "singleNote": "D",
+      "type": "MAJ"
+    },
+    {
+      "bassNote": "ROOT",
+      "complexity": "SINGLE_CHORD",
+      "length": "HALF_BAR",
+      "singleNote": "E",
+      "type": "MIN"
+    },
+    {
+      "bassNote": "ROOT",
+      "complexity": "SINGLE_CHORD",
+      "length": "HALF_BAR",
+      "singleNote": "A",
+      "type": "MAJ"
+    },
+    {
+        "bassNote": "ROOT",
+        "complexity": "VERSE_1",
+        "length": "HALF_BAR",
+        "singleNote": "D",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "THIRD",
+        "complexity": "VERSE_1",
+        "length": "HALF_BAR",
+        "singleNote": "A",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "VERSE_3",
+        "length": "FULL_BAR",
+        "singleNote": "B",
+        "type": "MIN"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "VERSE_1",
+        "length": "HALF_BAR",
+        "singleNote": "G",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "THIRD",
+        "complexity": "VERSE_2",
+        "length": "HALF_BAR",
+        "singleNote": "D",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "VERSE_2",
+        "length": "FULL_BAR",
+        "singleNote": "E",
+        "type": "MIN"
+      },
+      {
+        "bassNote": "THIRD",
+        "complexity": "VERSE_3",
+        "length": "HALF_BAR",
+        "singleNote": "D",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "VERSE_2",
+        "length": "HALF_BAR",
+        "singleNote": "G",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "BUILD_UP",
+        "length": "FULL_BAR",
+        "singleNote": "A",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "CHORUS_2",
+        "length": "HALF_BAR",
+        "singleNote": "D",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "THIRD",
+        "complexity": "CHORUS_1",
+        "length": "HALF_BAR",
+        "singleNote": "A",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "CHORUS_3",
+        "length": "FULL_BAR",
+        "singleNote": "E",
+        "type": "MIN"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "CHORUS_1",
+        "length": "HALF_BAR",
+        "singleNote": "G",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "BUILD_UP",
+        "length": "HALF_BAR",
+        "singleNote": "A",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "CHORUS_2",
+        "length": "HALF_BAR",
+        "singleNote": "D",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "THIRD",
+        "complexity": "CHORUS_1",
+        "length": "HALF_BAR",
+        "singleNote": "A",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "CHORUS_2",
+        "length": "FULL_BAR",
+        "singleNote": "E",
+        "type": "MIN"
+      },
+      {
+        "bassNote": "ROOT", 
+        "complexity": "CHORUS_1",
+        "length": "HALF_BAR",
+        "singleNote": "G",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "BUILD_UP",
+        "length": "HALF_BAR",
+        "singleNote": "A",
+        "type": "MAJ"
+      },
+      
+      {
+        "bassNote": "ROOT",
+        "complexity": "VERSE_2",
+        "length": "FULL_BAR",
+        "singleNote": "G",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "VERSE_4",
+        "length": "HALF_BAR",
+        "singleNote": "D",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "THIRD",
+        "complexity": "VERSE_3",
+        "length": "HALF_BAR",
+        "singleNote": "A",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "VERSE_4",
+        "length": "FULL_BAR",
+        "singleNote": "B",
+        "type": "MIN"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "VERSE_2",
+        "length": "HALF_BAR",
+        "singleNote": "G",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "THIRD",
+        "complexity": "VERSE_2",
+        "length": "HALF_BAR",
+        "singleNote": "D",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "VERSE_4",
+        "length": "HALF_BAR",
+        "singleNote": "E",
+        "type": "MIN"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "SINGLE_CHORD",
+        "length": "HALF_BAR",
+        "singleNote": "A",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "VERSE_1",
+        "length": "HALF_BAR",
+        "singleNote": "D",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "THIRD",
+        "complexity": "VERSE_3",
+        "length": "HALF_BAR",
+        "singleNote": "A",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "VERSE_2",
+        "length": "FULL_BAR",
+        "singleNote": "B",
+        "type": "MIN"
+      },
+
+      {
+        "bassNote": "THIRD",
+        "complexity": "VERSE_3",
+        "length": "HALF_BAR",
+        "singleNote": "D",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "VERSE_2",
+        "length": "HALF_BAR",
+        "singleNote": "G",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "BUILD_UP",
+        "length": "FULL_BAR",
+        "singleNote": "A",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "CHORUS_2",
+        "length": "HALF_BAR",
+        "singleNote": "D",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "THIRD",
+        "complexity": "CHORUS_1",
+        "length": "HALF_BAR",
+        "singleNote": "A",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "CHORUS_4",
+        "length": "FULL_BAR",
+        "singleNote": "E",
+        "type": "MIN"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "CHORUS_1",
+        "length": "HALF_BAR",
+        "singleNote": "G",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "BUILD_UP",
+        "length": "HALF_BAR",
+        "singleNote": "A",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "CHORUS_2",
+        "length": "HALF_BAR",
+        "singleNote": "D",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "THIRD",
+        "complexity": "CHORUS_1",
+        "length": "HALF_BAR",
+        "singleNote": "A",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "CHORUS_4",
+        "length": "FULL_BAR",
+        "singleNote": "E",
+        "type": "MIN"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "CHORUS_1",
+        "length": "HALF_BAR",
+        "singleNote": "G",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "BUILD_UP",
+        "length": "HALF_BAR",
+        "singleNote": "A",
+        "type": "MAJ"
+      },
+      {
+        "bassNote": "ROOT",
+        "complexity": "LAST_CHORD",
+        "length": "FULL_BAR",
+        "singleNote": "D",
+        "type": "MAJ"
+      }
+  ],
+  "songName": "I dont want miss a thing"
+}

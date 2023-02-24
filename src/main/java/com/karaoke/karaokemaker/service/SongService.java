@@ -12,7 +12,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -27,7 +26,6 @@ public class SongService {
     CacheManager cacheManager;
     ChordDtoMapper chordDtoMapper;
     UserService userService;
-
 
     public SongService(SongRepository songRepository, ChordService chordService,
                        CacheManager cacheManager, ChordDtoMapper chordDtoMapper, UserService userService) {
@@ -44,13 +42,14 @@ public class SongService {
         return songRepository.save(song);
     }
 
+
     @Transactional
     @CachePut(cacheNames = "Songs", key = "#result.uuid")
-    public Song saveSong(SongRequestDto songRequest) {
+    public Song createSong(SongRequestDto songRequest) {
 
         Song newSong = new Song();
 
-        List<Chord> songChords = chordDtoMapper.mapToChords(List.of(songRequest.getChordDtos()));
+        List<Chord> songChords = chordDtoMapper.mapDtosToChords(List.of(songRequest.getChordDtos()));
         newSong.setChords(songChords);
         newSong.setName(songRequest.getSongName());
         newSong.setUuid(UUID.randomUUID());
@@ -98,12 +97,6 @@ public class SongService {
             return Optional.empty();
     }
 
-//    public List<Song> getUserSongs() {
-//        Long userId = userService.currentUserId();
-//        List <Song> songs = songRepository.findAll();
-//        return songs.stream().filter(song -> Objects.equals(song.getUserId(), userId)).toList();
-//    }
-
     public List<Song> getUserSongs() {
         Long userId = userService.currentUserId();
         return songRepository.findAllByUserId(userId);
@@ -120,7 +113,7 @@ public class SongService {
             return Optional.empty();
         }
         Song replacedSong = new Song();
-        List<Chord> songChords = chordDtoMapper.mapToChords(List.of(songDto.getChordDtos()));
+        List<Chord> songChords = chordDtoMapper.mapDtosToChords(List.of(songDto.getChordDtos()));
         replacedSong.setChords(songChords);
         replacedSong.setName(songDto.getSongName());
         replacedSong.setUuid(UUID.randomUUID());
@@ -131,12 +124,10 @@ public class SongService {
         return Optional.of(updatedEntity);
     }
 
-
     @Transactional
     public void deleteSong(Long id) {
         songRepository.deleteById(id);
     }
-
 
     @Transactional
     @Cacheable(cacheNames = "Songs", key = "#uuid")
@@ -150,13 +141,11 @@ public class SongService {
             return null;
         } else {
             System.out.println("exist in the cache");
-            Song song = songCache.get(songUuid, Song.class);
 
-            return song;
+            return songCache.get(songUuid, Song.class);
 
         }
     }
-
 
     public String getSongPath(Song song, String format) {
         return switch (format) {

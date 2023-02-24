@@ -14,7 +14,7 @@ public class ChordDtoMapper {
         this.chordService = chordService;
     }
 
-    public List<Chord> mapToChords(List<ChordDto> chordsDto) {
+    public List<Chord> mapDtosToChords(List<ChordDto> chordsDto) {
         return chordsDto.stream()
                 .map(this::mapToChord)
                 .toList();
