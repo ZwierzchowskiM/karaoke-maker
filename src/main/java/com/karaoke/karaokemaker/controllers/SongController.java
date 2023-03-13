@@ -43,7 +43,7 @@ class SongController {
 
 
 
-    @PostMapping("/create")
+    @PostMapping("/")
     public ResponseEntity<?> createSong(@RequestBody SongRequestDto request) {
 
 
@@ -127,12 +127,12 @@ class SongController {
     }
 
 
-    @GetMapping("/")
+    @GetMapping("/user")
     public ResponseEntity<List<SongDto>> getSongsList() {
         return ResponseEntity.ok(songDtoMapper.mapToSongDtosList(songService.getUserSongs()));
     }
 
-    @GetMapping("/admin")
+    @GetMapping("/")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<SongDto>> getAllSongsList() {
         return ResponseEntity.ok(songDtoMapper.mapToSongDtosList(songService.getAllSongs()));

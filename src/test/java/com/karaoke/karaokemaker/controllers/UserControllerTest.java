@@ -89,15 +89,4 @@ class UserControllerTest {
 
     }
 
-    @Test
-    void registerUser() {
-    }
-
-    @Test
-    void deleteUser() {
-    }
-
-    @Test
-    void updateUser() {
-    }
 }

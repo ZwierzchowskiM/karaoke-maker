@@ -82,7 +82,7 @@ class SongControllerTest {
         given(songService.createSong(Mockito.any(SongRequestDto.class))).willReturn(song1);
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .post("/api/v1/songs/create")
+                        .post("/api/v1/songs/")
                         .content(asJsonString(song1))
                         .contentType(MediaType.APPLICATION_JSON))
 
@@ -108,7 +108,7 @@ class SongControllerTest {
         when(songDtoMapper.mapToSongDtosList(Mockito.anyList())).thenReturn(allSongs);
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .get("/api/v1/songs/all")
+                        .get("/api/v1/songs/")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))

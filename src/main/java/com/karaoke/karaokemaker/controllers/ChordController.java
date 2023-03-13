@@ -22,7 +22,7 @@ public class ChordController {
         this.chordService = chordService;
     }
 
-    @PostMapping("/add")
+    @PostMapping("/")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Chord> createChord(@RequestBody Chord chord) {
         return ResponseEntity.ok(chordService.saveChord(chord));
