@@ -18,7 +18,7 @@ public class SongDtoMapper {
                 .toList();
     }
 
-    public static SongDto mapToSongDto(Song song) {
+    private static SongDto mapToSongDto(Song song) {
         return SongDto.builder()
                 .id(song.getId())
                 .name(song.getName())

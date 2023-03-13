@@ -12,18 +12,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 @ResponseStatus(value = NOT_FOUND)
 public class AudioFileNotFoundException extends RuntimeException {
 
-    private SingleNote singleNote;
-    private ChordType type;
-    private Complexity complexity;
-    private Length length;
-
-
     public AudioFileNotFoundException(SingleNote singleNote, ChordType type, Complexity complexity, Length length) {
-        super("File for chord " + singleNote + type + " complexity: " + complexity + " length: " + length + " is not found");
-        this.singleNote = singleNote;
-        this.type = type;
-        this.complexity = complexity;
-        this.length = length;
-
+        super("Audio File for chord " + singleNote + type + " complexity: " + complexity + " length: " + length + " is not found");
     }
 }

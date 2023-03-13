@@ -44,7 +44,7 @@ $ mvn package
 * Then build docker image using already built jar file.
 
 ```
-$ docker build - t karaokemaker .
+$ docker build -t karaokemaker .
 
 ```
 
@@ -57,7 +57,7 @@ You can open Swagger UI at address:
 http://localhost:8080/swagger-ui/#/
 
 Something similar to this should appear:
-![Algorithm schema](/Files/images/swagger_ui.png)
+![swaggerUI](/Files/images/swagger_ui.png)
 
 ## Instruction of use
 
