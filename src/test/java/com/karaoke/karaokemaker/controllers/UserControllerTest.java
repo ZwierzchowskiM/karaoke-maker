@@ -85,8 +85,6 @@ class UserControllerTest {
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].firstName", is("Foo")))
                 .andExpect(jsonPath("$[1].firstName", is("Bar")));
-
-
     }
 
 }

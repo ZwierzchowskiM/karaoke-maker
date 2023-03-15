@@ -45,7 +45,6 @@ class ChordControllerTest {
     @MockBean
     private ChordRepository chordRepository;
 
-
     @Test
     void givenChord_whenGetSingleChord_thenGetChord() throws Exception {
 
@@ -61,8 +60,6 @@ class ChordControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.path", Matchers.is("test/path")));
-
-
     }
 
 
@@ -100,7 +97,7 @@ class ChordControllerTest {
         when(chordService.getAllChords()).thenReturn(allChords);
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .get("/api/v1/chords/all")
+                        .get("/api/v1/chords/")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(3)))
@@ -110,13 +107,10 @@ class ChordControllerTest {
 
         verify(chordService, VerificationModeFactory.times(1)).getAllChords();
         reset(chordService);
-
-
     }
 
-
     @Test
-    public void givenChord_whendeleteChordById_thenReturnStatusNoContent() throws Exception {
+    public void givenChord_whenDeleteChordById_thenReturnStatusNoContent() throws Exception {
         Chord chord1 = new Chord();
         chord1.setId(1L);
 
@@ -139,9 +133,7 @@ class ChordControllerTest {
         chord2.setId(2L);
         chord2.setLength(Length.FULL_BAR);
 
-
         when(chordService.replaceChord(eq(chord1.getId()), Mockito.any())).thenReturn(Optional.of(chord2));
-
 
         mockMvc.perform(MockMvcRequestBuilders
                         .put("/api/v1/chords/" + chord1.getId())
@@ -159,23 +151,6 @@ class ChordControllerTest {
             throw new RuntimeException(e);
         }
     }
-
-
 }
-
-//    @Test
-//    public void deleteChordById_notFound() throws Exception {
-//        Chord chord1 = new Chord();
-//        chord1.setId(99L);
-//        Mockito.when(chordRepository.findById(chord1.getId())).thenReturn(null);
-//
-//
-//        mockMvc.perform(MockMvcRequestBuilders
-//                        .delete("/api/v1/chords/" + chord1.getId())
-//                        .contentType(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isBadRequest())
-//                .andExpect(result ->
-//                        assertTrue(result.getResolvedException() instanceof InvalidRequestException));
-//    }
 
 

@@ -66,9 +66,6 @@ class SongControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name", Matchers.is("Foo")));
-
-
-
     }
 
 
@@ -103,7 +100,6 @@ class SongControllerTest {
                 .name("Second")
                 .build();
 
-
         List<SongDto> allSongs = Arrays.asList(song1,song2);
         when(songDtoMapper.mapToSongDtosList(Mockito.anyList())).thenReturn(allSongs);
 
@@ -117,8 +113,6 @@ class SongControllerTest {
 
         verify(songService, VerificationModeFactory.times(1)).getAllSongs();
         reset(songService);
-
-
     }
 
     @Test
@@ -147,9 +141,7 @@ class SongControllerTest {
         song2.setId(2L);
         song2.setName("test2");
 
-
         when(songService.replaceSong(eq(song1.getId()), Mockito.any())).thenReturn(Optional.of(song2));
-
 
         mockMvc.perform(MockMvcRequestBuilders
                         .put("/api/v1/songs/" + song1.getId())

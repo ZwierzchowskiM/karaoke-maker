@@ -5,10 +5,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -37,55 +41,49 @@ class SecurityConfig   {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 
-//        http.authorizeHttpRequests(
-//                requests -> {
-//                    try {
-//                        requests
-//                                .antMatchers("/swagger-ui/**").permitAll()
-//                                .antMatchers("/v2/api-docs").permitAll()
-//                                .antMatchers("/webjars/**").permitAll()
-//                                .antMatchers("/swagger-resources/**").permitAll()
-//                                .antMatchers("/h2-console/**").permitAll()
-//                                .anyRequest().authenticated() //AnyRequestMatcher -> AuthenticatedAuthorizationManager Wszystkie pozostałe żądania wymagają uwierzytelnienia z dowolną rolą.
-//                                .and()
-//                                .formLogin().permitAll()
-//                                .and()
-//                                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                                .and()
-//                                .addFilter(authenticationFilter())
-//                                .addFilter(new JwtAuthorizationFilter(authenticationConfiguration.getAuthenticationManager(), customUserDetailsService, secret))
-//                                .exceptionHandling()
-//                                .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
-//                                .and()
-//                                .headers().frameOptions().disable();
-//
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//        );
-//
-//        http.csrf().disable();
-//
-//        http
-//                .logout(logout -> logout
-//                        .logoutUrl("/logout")
-//                        .addLogoutHandler(new SecurityContextLogoutHandler())
-//                );
-//
-//        return http.build();
-//    }
+        http.authorizeHttpRequests(
+                requests -> {
+                    try {
+                        requests
+                                .antMatchers("/swagger-ui/**").permitAll()
+                                .antMatchers("/v2/api-docs").permitAll()
+                                .antMatchers("/webjars/**").permitAll()
+                                .antMatchers("/swagger-resources/**").permitAll()
+                                .antMatchers("/h2-console/**").permitAll()
+                                .anyRequest().authenticated() //AnyRequestMatcher -> AuthenticatedAuthorizationManager Wszystkie pozostałe żądania wymagają uwierzytelnienia z dowolną rolą.
+                                .and()
+                                .formLogin().permitAll()
+                                .and()
+                                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                                .and()
+                                .addFilter(authenticationFilter())
+                                .addFilter(new JwtAuthorizationFilter(authenticationConfiguration.getAuthenticationManager(), customUserDetailsService, secret))
+                                .exceptionHandling()
+                                .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
+                                .and()
+                                .headers().frameOptions().disable();
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+        );
+
+        http.csrf().disable();
+
+        return http.build();
+    }
 
 
 //---------------------------------------------------
 //////      ////  security off
-      http.csrf(csrf -> csrf.ignoringRequestMatchers(PathRequest.toH2Console()));
-      http.cors().and().csrf().disable();
-        http.headers().frameOptions().disable();
+//      http.csrf(csrf -> csrf.ignoringRequestMatchers(PathRequest.toH2Console()));
+//      http.cors().and().csrf().disable();
+//        http.headers().frameOptions().disable();
 //
-       return http.build();
-    }
-//-------------------------------------
+//       return http.build();
+//    }
+////-------------------------------------
 
     public JsonObjectAuthenticationFilter authenticationFilter() throws Exception {
 
