@@ -49,7 +49,7 @@ class UserControllerTest {
 
 
     @Test
-    void getUser() throws Exception {
+    void getUser_thenReturnUserStatusOk() throws Exception {
 
         User user1 = new User();
         user1.setFirstName("Foo");
@@ -65,7 +65,7 @@ class UserControllerTest {
     }
 
     @Test
-    void getUsers() throws Exception {
+    void getUsers_thenReturnAllUsersStatusOk() throws Exception {
 
         User user1 = new User();
         user1.setFirstName("Foo");

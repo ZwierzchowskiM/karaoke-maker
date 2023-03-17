@@ -46,7 +46,7 @@ class ChordControllerTest {
     private ChordRepository chordRepository;
 
     @Test
-    void givenChord_whenGetSingleChord_thenGetChord() throws Exception {
+    void getSingleChord_thenReturnChordStatusOk() throws Exception {
 
         //given
         Chord chord = new Chord();
@@ -64,7 +64,7 @@ class ChordControllerTest {
 
 
     @Test
-    public void givenChord_whenPostChord_thenCreateChord() throws Exception {
+    public void createChord_thenReturnCreateChordStatusCreated() throws Exception {
 
         Chord newChord = new Chord();
         newChord.setId(1L);
@@ -84,7 +84,7 @@ class ChordControllerTest {
     }
 
     @Test
-    void given3Chords_whenGetChords_thenReturnJsonArray() throws Exception {
+    void getChords_thenReturnJsonArrayAllChords() throws Exception {
 
         Chord chord1 = new Chord();
         chord1.setId(1L);
@@ -110,7 +110,7 @@ class ChordControllerTest {
     }
 
     @Test
-    public void givenChord_whenDeleteChordById_thenReturnStatusNoContent() throws Exception {
+    public void deleteChordById_thenReturnStatusNoContent() throws Exception {
         Chord chord1 = new Chord();
         chord1.setId(1L);
 
@@ -125,7 +125,7 @@ class ChordControllerTest {
 
 
     @Test
-    public void updateChordRecord() throws Exception {
+    public void updateChordRecord_thenReturnStatusOk() throws Exception {
         Chord chord1 = new Chord();
         chord1.setId(1L);
         chord1.setLength(Length.QUARTER_BAR);

@@ -5,7 +5,6 @@ import com.karaoke.karaokemaker.model.Chord;
 import com.karaoke.karaokemaker.repositories.ChordRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -43,7 +42,7 @@ class ChordServiceTest {
 
 
     @Test
-    public void whenValidId_thenChordShouldBeFound() {
+    public void getSingleChord_whenValidId_thenChordShouldBeFound() {
 
         //given
         Chord chord1 = new Chord();
@@ -58,7 +57,7 @@ class ChordServiceTest {
 
 
     @Test
-    public void whenInValidId_thenChordShouldBeNotFound() {
+    public void getSingleChord_whenInValidId_thenChordShouldBeNotFound() {
         //given
         when(chordRepository.findById(-99L)).thenReturn(Optional.empty());
         //when
@@ -69,7 +68,7 @@ class ChordServiceTest {
     }
 
     @Test
-    public void given3Chords_whengetAllChords_thenReturn3Records() {
+    public void getAllChords_thenReturn3Records() {
        //given
         Chord chord1 = new Chord();
         chord1.setId(1L);
@@ -90,7 +89,7 @@ class ChordServiceTest {
 
 
     @Test
-    public void whensaveChord_thensaveChord() {
+    public void saveChord_thenReturnSavedChord() {
         //given
         Chord chord1 = new Chord();
         chord1.setId(1L);
@@ -108,7 +107,7 @@ class ChordServiceTest {
 
 
     @Test
-    void deleteChord() {
+    void deleteChord_thenDeleteChordFromRepository() {
         //given
         Chord chord1 = new Chord();
         chord1.setId(1L);
@@ -123,7 +122,7 @@ class ChordServiceTest {
     }
 
     @Test
-    void replaceChord() {
+    void replaceChord_thenReplaceChordInRepository() {
 
         //given
         Chord chord1 = new Chord();

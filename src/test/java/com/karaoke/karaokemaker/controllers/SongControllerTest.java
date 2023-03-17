@@ -54,7 +54,7 @@ class SongControllerTest {
 
 
     @Test
-    void givenSong_whenGetSingleSongs_thenGetSong() throws Exception {
+    void getSingleSongs_thenGetSongStatusOk() throws Exception {
 
         Song song1 = new Song();
         song1.setName("Foo");
@@ -70,7 +70,7 @@ class SongControllerTest {
 
 
     @Test
-    public void givenSong_createSong_thenReturnSong() throws Exception {
+    public void createSong_thenReturnSongsStatusCreated() throws Exception {
 
         Song song1 = new Song();
         song1.setName("Foo");
@@ -91,7 +91,7 @@ class SongControllerTest {
 
 
     @Test
-    void given3Songs_whenGetAllSongsList_thenReturnJsonArray() throws Exception {
+    void getAllSongsList_thenReturnJsonArrayAllSongs() throws Exception {
 
         SongDto song1 = SongDto.builder()
                 .name("First")
@@ -116,7 +116,7 @@ class SongControllerTest {
     }
 
     @Test
-    public void whenDeleteSongById_thenReturnStatusNoContent() throws Exception {
+    public void deleteSongById_thenReturnStatusNoContent() throws Exception {
         Song song1 = new Song();
 
         song1.setId(1L);
@@ -133,7 +133,7 @@ class SongControllerTest {
 
 
     @Test
-    public void updateSongRecord() throws Exception {
+    public void updateSongRecord_thenReturnStatusOk() throws Exception {
         Song song1 = new Song();
         song1.setId(1L);
         song1.setName("test");

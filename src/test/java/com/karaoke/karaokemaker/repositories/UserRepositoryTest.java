@@ -21,7 +21,7 @@ class UserRepositoryTest {
 
 
     @Test
-    public void whenFindByEmail_thenReturnUser() {
+    public void findByEmail_thenReturnUser() {
 
         // given
         User user = User.builder()
@@ -42,7 +42,7 @@ class UserRepositoryTest {
 
 
     @Test
-    public void whenDeleteByEmail_thenReturnNull() {
+    public void deleteByEmail_thenReturnNull() {
 
         // given
         User user = User.builder()

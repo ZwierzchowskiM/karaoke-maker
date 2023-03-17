@@ -27,7 +27,7 @@ class SongRepositoryTest {
 
 
     @Test
-    public void whenFindAll() {
+    public void findAll_thenReturnAllSongs() {
 
         // given
         Song song1 = new Song();
@@ -49,7 +49,7 @@ class SongRepositoryTest {
     }
 
     @Test
-    public void whenFindAllByUserId_thenReturnSongs() {
+    public void findAllByUserId_thenReturnUserSongs() {
 
         // given
         long userId = 1;

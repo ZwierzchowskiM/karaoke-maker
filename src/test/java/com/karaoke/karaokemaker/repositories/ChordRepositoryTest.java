@@ -25,7 +25,7 @@ class ChordRepositoryTest {
 
 
     @Test
-    public void whenFindAll() {
+    public void findAll_thenReturnAllSongs() {
 
         // given
         Chord chord1 = new Chord();
