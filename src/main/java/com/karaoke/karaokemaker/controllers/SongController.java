@@ -25,7 +25,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/v1/songs")
+@RequestMapping("${api.path}/songs")
 class SongController {
 
     SongRepository songRepository;
@@ -39,9 +39,6 @@ class SongController {
         this.userService = userService;
         this.songDtoMapper = songDtoMapper;
     }
-
-
-
 
     @PostMapping("/")
     public ResponseEntity<?> createSong(@RequestBody SongRequestDto request) {
@@ -110,7 +107,6 @@ class SongController {
                 .contentLength(downloadFile.length())
                 .contentType(MediaType.parseMediaType("application/octet-stream"))
                 .body(resource);
-
     }
 
 
@@ -150,7 +146,6 @@ class SongController {
 
     @GetMapping(path = "/{id}/download")
     public ResponseEntity<Resource> downloadSong(@PathVariable Long id, @RequestParam String format) {
-
 
         Song song = songService.getSingleSong(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Song with ID :" + id + " Not Found"));

@@ -74,17 +74,6 @@ class SecurityConfig   {
         return http.build();
     }
 
-
-//---------------------------------------------------
-//////      ////  security off
-//      http.csrf(csrf -> csrf.ignoringRequestMatchers(PathRequest.toH2Console()));
-//      http.cors().and().csrf().disable();
-//        http.headers().frameOptions().disable();
-//
-//       return http.build();
-//    }
-////-------------------------------------
-
     public JsonObjectAuthenticationFilter authenticationFilter() throws Exception {
 
 

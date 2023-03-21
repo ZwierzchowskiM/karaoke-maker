@@ -9,12 +9,11 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class ChordDto {
+
     SingleNote singleNote;
     ChordType type;
     BassNote bassNote;
     Length length;
     Complexity complexity;
-
-
 
 }

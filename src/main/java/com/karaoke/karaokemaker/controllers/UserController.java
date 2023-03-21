@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api/v1/users")
+@RequestMapping("${api.path}/users")
 public class UserController {
 
     UserService userService;
@@ -22,7 +22,6 @@ public class UserController {
         this.userService = userService;
         this.userRepository = userRepository;
     }
-
 
     @GetMapping("/{id}")
     ResponseEntity<?> getUser(@PathVariable Long id) {
@@ -67,8 +66,4 @@ public class UserController {
 
         return ResponseEntity.ok().body(modifiedUser);
     }
-
-
-
-
 }

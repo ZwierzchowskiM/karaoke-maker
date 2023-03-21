@@ -55,7 +55,6 @@ public class ChordService {
         }
     }
 
-
     public Optional<Chord> replaceChord(Long chordId, Chord chord) {
         if (!chordRepository.existsById(chordId)) {
             return Optional.empty();

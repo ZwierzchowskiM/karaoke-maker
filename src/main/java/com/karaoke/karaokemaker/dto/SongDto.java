@@ -11,10 +11,7 @@ import lombok.Setter;
 @Builder
 public class SongDto  {
 
-
     private Long id;
     private String name;
-
-
 
 }

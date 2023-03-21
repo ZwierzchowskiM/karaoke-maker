@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/api/v1/chords")
+@RequestMapping("${api.path}/chords")
 public class ChordController {
     ChordRepository chordRepository;
     ChordService chordService;
@@ -40,7 +40,7 @@ public class ChordController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getSignleChord(@PathVariable Long id) {
+    public ResponseEntity<?> getSingleChord(@PathVariable Long id) {
 
         LOGGER.info("Getting single chord");
         Chord chord = chordService.getSingleChord(id)
