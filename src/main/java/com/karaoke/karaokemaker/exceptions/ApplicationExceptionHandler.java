@@ -16,21 +16,24 @@ public class ApplicationExceptionHandler {
 
     @ExceptionHandler(value = ResourceNotFoundException.class)
     public ResponseEntity<Object> exception(ResourceNotFoundException exception) {
-        return new ResponseEntity<>("Resource not found", HttpStatus.NOT_FOUND);
+        String msg  = exception.getMessage();
+        return new ResponseEntity<>(msg, HttpStatus.NOT_FOUND);
     }
 
 
     @ExceptionHandler(value = AudioFileNotFoundException.class)
     public ResponseEntity<Object> exception(AudioFileNotFoundException exception) {
-        return new ResponseEntity<>("Audio File Not Found", HttpStatus.BAD_REQUEST);
+
+        String msg  = exception.getMessage();
+        return new ResponseEntity<>(msg, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Object> exception(MethodArgumentNotValidException ex) {
+    public ResponseEntity<Object> exception(MethodArgumentNotValidException exception) {
 
         List<String> errors = new ArrayList<>();
 
-        ex.getAllErrors().forEach(error -> errors.add((error.getDefaultMessage())));
+        exception.getAllErrors().forEach(error -> errors.add((error.getDefaultMessage())));
 
         Map<String, Object> errorResponse = new HashMap<>();
         errorResponse.put("errors", errors);
