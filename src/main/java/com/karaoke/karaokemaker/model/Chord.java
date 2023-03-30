@@ -28,7 +28,6 @@ public class Chord {
     private Complexity complexity;
     @Enumerated(EnumType.STRING)
     private BassNote bassNote;
-
     private String path;
 
     @Override

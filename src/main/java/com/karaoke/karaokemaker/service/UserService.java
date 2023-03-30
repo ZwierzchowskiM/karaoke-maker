@@ -24,7 +24,6 @@ public class UserService {
     private static final String ADMIN_AUTHORITY = "ROLE_ADMIN";
     private final PasswordEncoder passwordEncoder;
 
-
     public UserService(Validator validator, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.validator = validator;
         this.userRepository = userRepository;
@@ -52,16 +51,13 @@ public class UserService {
         return (List<User>) userRepository.findAll();
     }
 
-
     public Optional<User> findUserById(Long id) {
         return userRepository.findById(id);
     }
 
-
     public Optional<User> findCredentialsByEmail(String email) {
         return userRepository.findByEmail(email);
     }
-
 
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
@@ -87,7 +83,6 @@ public class UserService {
         return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
-
     @Transactional
     public User register(UserRegistrationDto registration) {
         User savedUser = new User();
@@ -101,7 +96,6 @@ public class UserService {
         return savedUser;
     }
 
-
     public Optional<User> replaceUser(Long id, UserRegistrationDto userDto) {
 
         if (!userRepository.existsById(id)) {
@@ -112,7 +106,6 @@ public class UserService {
         modifiedUser.setFirstName(userDto.getFirstName());
         modifiedUser.setLastName(userDto.getLastName());
         modifiedUser.setEmail(userDto.getEmail());
-
         User updatedEntity = userRepository.save(modifiedUser);
         return Optional.of(updatedEntity);
 

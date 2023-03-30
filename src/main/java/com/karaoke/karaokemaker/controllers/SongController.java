@@ -15,6 +15,7 @@ import org.springframework.http.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.FileInputStream;
@@ -42,8 +43,6 @@ class SongController {
 
     @PostMapping("/")
     public ResponseEntity<?> createSong(@RequestBody SongRequestDto request) {
-
-
         Song generatedSong = songService.createSong(request);
 
         URI savedSongUri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -67,13 +66,12 @@ class SongController {
 
         String songPath = null;
         try {
-            songPath = songService.generateSong(generatedSong,"WAV");
+            songPath = songService.generateSong(generatedSong, "WAV");
         } catch (UnsupportedAudioFileException | IOException e) {
             e.printStackTrace();
         }
 
         generatedSong.setPathWavFile(songPath);
-
         return ResponseEntity.ok()
                 .body(generatedSong);
     }
@@ -83,13 +81,11 @@ class SongController {
     public ResponseEntity<?> downloadSongPreview(@PathVariable String uuid) {
 
         Song generatedSong = songService.getFromCache(uuid);
-
         if (generatedSong == null) {
             return ResponseEntity.notFound().build();
         }
 
         String songPath = generatedSong.getPathWavFile();
-
         File downloadFile = new File(songPath);
         InputStreamResource resource = null;
         try {
@@ -118,7 +114,6 @@ class SongController {
         if (generatedSong == null) {
             return ResponseEntity.notFound().build();
         }
-
         return ResponseEntity.ok(songService.saveSong(generatedSong));
     }
 
@@ -135,7 +130,7 @@ class SongController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getSong(@PathVariable Long id) {
+    public ResponseEntity<Song> getSong(@PathVariable Long id) {
 
         Song song = songService.getSingleSong(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Song with ID :" + id + " Not Found"));
@@ -149,7 +144,6 @@ class SongController {
 
         Song song = songService.getSingleSong(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Song with ID :" + id + " Not Found"));
-
         String songPath = songService.getSongPath(song, format);
 
         File downloadFile = new File(songPath);
@@ -170,10 +164,8 @@ class SongController {
                 .body(resource);
     }
 
-
     @GetMapping(path = "/{id}/generate")
     public ResponseEntity<String> generateSongFile(@PathVariable Long id, @RequestParam String format) {
-
 
         Song song = songService.getSingleSong(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Song with ID :" + id + " Not Found"));
@@ -188,16 +180,14 @@ class SongController {
         return ResponseEntity.ok().body(songPath);
     }
 
-
     @PutMapping("/{id}")
-    ResponseEntity<Song> updateSong(@PathVariable Long id, @RequestBody SongRequestDto song)  {
+    ResponseEntity<Song> updateSong(@PathVariable Long id, @RequestBody SongRequestDto song) {
 
-        Song replacedSong  = songService.replaceSong(id, song)
+        Song replacedSong = songService.replaceSong(id, song)
                 .orElseThrow(() -> new ResourceNotFoundException("Song with ID :" + id + " Not Found"));
 
         return ResponseEntity.ok().body(replacedSong);
     }
-
 
     @DeleteMapping("/{id}")
     ResponseEntity<?> deleteSong(@PathVariable Long id) {

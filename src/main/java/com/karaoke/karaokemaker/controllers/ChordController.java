@@ -40,7 +40,7 @@ public class ChordController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getSingleChord(@PathVariable Long id) {
+    public ResponseEntity<Chord> getSingleChord(@PathVariable Long id) {
 
         LOGGER.info("Getting single chord");
         Chord chord = chordService.getSingleChord(id)
