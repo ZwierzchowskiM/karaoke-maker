@@ -1,134 +1,63 @@
-2023-03-21 10:52:18 [restartedMain] INFO  c.k.k.KaraokemakerApplication - Starting KaraokemakerApplication using Java 18.0.1.1 on DESKTOP-9RD7I2V with PID 21476 (C:\Users\JAVA\IdeaProjects\KaraokeMaker\target\classes started by JAVA in C:\Users\JAVA\IdeaProjects\KaraokeMaker)
-2023-03-21 10:52:18 [restartedMain] INFO  c.k.k.KaraokemakerApplication - No active profile set, falling back to 1 default profile: "default"
-2023-03-21 10:52:18 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-03-21 10:52:18 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-03-21 10:52:22 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-03-21 10:52:22 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 141 ms. Found 3 JPA repository interfaces.
-2023-03-21 10:52:24 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
-2023-03-21 10:52:24 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2023-03-21 10:52:24 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
-2023-03-21 10:52:24 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2023-03-21 10:52:24 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 6141 ms
-2023-03-21 10:52:25 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2023-03-21 10:52:26 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2023-03-21 10:52:26 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/sample'
-2023-03-21 10:52:28 [restartedMain] INFO  org.ehcache.core.EhcacheManager - Cache 'Songs' created in EhcacheManager.
-2023-03-21 10:52:28 [restartedMain] INFO  org.ehcache.jsr107.Eh107CacheManager - Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/JAVA/IdeaProjects/KaraokeMaker/target/classes/ehcache.xml,Cache=Songs
-2023-03-21 10:52:28 [restartedMain] INFO  org.ehcache.jsr107.Eh107CacheManager - Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/JAVA/IdeaProjects/KaraokeMaker/target/classes/ehcache.xml,Cache=Songs
-2023-03-21 10:52:28 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-03-21 10:52:29 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.12.Final
-2023-03-21 10:52:29 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2023-03-21 10:52:30 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
-2023-03-21 10:52:31 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-03-21 10:52:31 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-03-21 10:52:33 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
-2023-03-21 10:52:33 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-03-21 10:52:34 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1e9a589c, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@64f2e790, org.springframework.security.web.context.SecurityContextPersistenceFilter@479100e8, org.springframework.security.web.header.HeaderWriterFilter@34f4a2ff, org.springframework.security.web.authentication.logout.LogoutFilter@35045e7b, com.karaoke.karaokemaker.config.JsonObjectAuthenticationFilter@1271761, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@6f115423, com.karaoke.karaokemaker.config.JwtAuthorizationFilter@2c41d3ff, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@680a03e7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@73af9b6d, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@60532053, org.springframework.security.web.session.SessionManagementFilter@69d7aa45, org.springframework.security.web.access.ExceptionTranslationFilter@7e4dede0, org.springframework.security.web.access.intercept.AuthorizationFilter@532536e1]
-2023-03-21 10:52:35 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
-2023-03-21 10:52:36 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
-2023-03-21 10:52:37 [restartedMain] INFO  c.k.k.KaraokemakerApplication - Started KaraokemakerApplication in 19.732 seconds (JVM running for 21.442)
-2023-03-21 10:52:37 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-03-21 10:52:37 [SpringApplicationShutdownHook] INFO  org.ehcache.core.EhcacheManager - Cache 'Songs' removed from EhcacheManager.
-2023-03-21 10:52:37 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2023-03-21 10:52:37 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2023-03-21 11:26:36 [restartedMain] INFO  c.k.k.KaraokemakerApplication - Starting KaraokemakerApplication using Java 18.0.1.1 on DESKTOP-9RD7I2V with PID 80 (C:\Users\JAVA\IdeaProjects\KaraokeMaker\target\classes started by JAVA in C:\Users\JAVA\IdeaProjects\KaraokeMaker)
-2023-03-21 11:26:36 [restartedMain] INFO  c.k.k.KaraokemakerApplication - No active profile set, falling back to 1 default profile: "default"
-2023-03-21 11:26:36 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-03-21 11:26:36 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-03-21 11:26:40 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-03-21 11:26:40 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 140 ms. Found 3 JPA repository interfaces.
-2023-03-21 11:26:43 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
-2023-03-21 11:26:43 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2023-03-21 11:26:43 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
-2023-03-21 11:26:44 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2023-03-21 11:26:44 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 7658 ms
-2023-03-21 11:26:44 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2023-03-21 11:26:45 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2023-03-21 11:26:45 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/sample'
-2023-03-21 11:26:46 [restartedMain] INFO  org.ehcache.core.EhcacheManager - Cache 'Songs' created in EhcacheManager.
-2023-03-21 11:26:46 [restartedMain] INFO  org.ehcache.jsr107.Eh107CacheManager - Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/JAVA/IdeaProjects/KaraokeMaker/target/classes/ehcache.xml,Cache=Songs
-2023-03-21 11:26:46 [restartedMain] INFO  org.ehcache.jsr107.Eh107CacheManager - Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/JAVA/IdeaProjects/KaraokeMaker/target/classes/ehcache.xml,Cache=Songs
-2023-03-21 11:26:47 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-03-21 11:26:47 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.12.Final
-2023-03-21 11:26:47 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2023-03-21 11:26:48 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
-2023-03-21 11:26:49 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-03-21 11:26:49 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-03-21 11:26:52 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
-2023-03-21 11:26:52 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-03-21 11:26:53 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@499bd7e0, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7e459685, org.springframework.security.web.context.SecurityContextPersistenceFilter@5ae8e89f, org.springframework.security.web.header.HeaderWriterFilter@2a1a3e62, org.springframework.security.web.authentication.logout.LogoutFilter@5b136c46, com.karaoke.karaokemaker.config.JsonObjectAuthenticationFilter@413429c0, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@547d6673, com.karaoke.karaokemaker.config.JwtAuthorizationFilter@697e7c01, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@79936225, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4025fd49, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7e4d8219, org.springframework.security.web.session.SessionManagementFilter@6bda89d, org.springframework.security.web.access.ExceptionTranslationFilter@371c110f, org.springframework.security.web.access.intercept.AuthorizationFilter@27220967]
-2023-03-21 11:26:53 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
-2023-03-21 11:26:54 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
-2023-03-21 11:26:56 [restartedMain] INFO  c.k.k.KaraokemakerApplication - Started KaraokemakerApplication in 22.4 seconds (JVM running for 24.502)
-2023-03-21 11:28:29 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-03-21 11:28:29 [SpringApplicationShutdownHook] INFO  org.ehcache.core.EhcacheManager - Cache 'Songs' removed from EhcacheManager.
-2023-03-21 11:28:29 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2023-03-21 11:28:29 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2023-03-21 11:29:59 [restartedMain] INFO  c.k.k.KaraokemakerApplication - Starting KaraokemakerApplication using Java 18.0.1.1 on DESKTOP-9RD7I2V with PID 14200 (C:\Users\JAVA\IdeaProjects\KaraokeMaker\target\classes started by JAVA in C:\Users\JAVA\IdeaProjects\KaraokeMaker)
-2023-03-21 11:29:59 [restartedMain] INFO  c.k.k.KaraokemakerApplication - No active profile set, falling back to 1 default profile: "default"
-2023-03-21 11:29:59 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2023-03-21 11:29:59 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2023-03-21 11:30:02 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-03-21 11:30:02 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 104 ms. Found 3 JPA repository interfaces.
-2023-03-21 11:30:04 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
-2023-03-21 11:30:04 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
-2023-03-21 11:30:04 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
-2023-03-21 11:30:04 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2023-03-21 11:30:04 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 5093 ms
-2023-03-21 11:30:05 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2023-03-21 11:30:05 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2023-03-21 11:30:05 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/sample'
-2023-03-21 11:30:07 [restartedMain] INFO  org.ehcache.core.EhcacheManager - Cache 'Songs' created in EhcacheManager.
-2023-03-21 11:30:07 [restartedMain] INFO  org.ehcache.jsr107.Eh107CacheManager - Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/JAVA/IdeaProjects/KaraokeMaker/target/classes/ehcache.xml,Cache=Songs
-2023-03-21 11:30:07 [restartedMain] INFO  org.ehcache.jsr107.Eh107CacheManager - Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/JAVA/IdeaProjects/KaraokeMaker/target/classes/ehcache.xml,Cache=Songs
-2023-03-21 11:30:07 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-03-21 11:30:07 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.12.Final
-2023-03-21 11:30:08 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2023-03-21 11:30:08 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
-2023-03-21 11:30:09 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-03-21 11:30:09 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-03-21 11:30:11 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
-2023-03-21 11:30:11 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-03-21 11:30:11 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@501775a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1fa1e1b8, org.springframework.security.web.context.SecurityContextPersistenceFilter@60c06233, org.springframework.security.web.header.HeaderWriterFilter@47c1d69b, org.springframework.security.web.authentication.logout.LogoutFilter@4fb19f4e, com.karaoke.karaokemaker.config.JsonObjectAuthenticationFilter@1b1d7e92, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@7f9f64ea, com.karaoke.karaokemaker.config.JwtAuthorizationFilter@11e895fb, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@49be4407, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6f1cc614, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@1fdd9b3b, org.springframework.security.web.session.SessionManagementFilter@43303a21, org.springframework.security.web.access.ExceptionTranslationFilter@4ebbb8a5, org.springframework.security.web.access.intercept.AuthorizationFilter@54d9cc7e]
-2023-03-21 11:30:11 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
-2023-03-21 11:30:12 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
-2023-03-21 11:30:12 [restartedMain] INFO  c.k.k.KaraokemakerApplication - Started KaraokemakerApplication in 14.731 seconds (JVM running for 16.597)
-2023-03-21 11:30:17 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-03-21 11:30:17 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2023-03-21 11:30:17 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
-2023-03-21 11:30:34 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-03-21 11:30:34 [SpringApplicationShutdownHook] INFO  org.ehcache.core.EhcacheManager - Cache 'Songs' removed from EhcacheManager.
-2023-03-21 11:30:34 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2023-03-21 11:30:34 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2023-03-21 11:30:58 [main] INFO  c.k.k.c.ChordControllerTest - Starting ChordControllerTest using Java 18.0.1.1 on DESKTOP-9RD7I2V with PID 21468 (started by JAVA in C:\Users\JAVA\IdeaProjects\KaraokeMaker)
-2023-03-21 11:30:58 [main] INFO  c.k.k.c.ChordControllerTest - No active profile set, falling back to 1 default profile: "default"
-2023-03-21 11:31:02 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-03-21 11:31:02 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 131 ms. Found 3 JPA repository interfaces.
-2023-03-21 11:31:05 [main] INFO  org.ehcache.core.EhcacheManager - Cache 'Songs' created in EhcacheManager.
-2023-03-21 11:31:05 [main] INFO  org.ehcache.jsr107.Eh107CacheManager - Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/JAVA/IdeaProjects/KaraokeMaker/target/classes/ehcache.xml,Cache=Songs
-2023-03-21 11:31:05 [main] INFO  org.ehcache.jsr107.Eh107CacheManager - Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/JAVA/IdeaProjects/KaraokeMaker/target/classes/ehcache.xml,Cache=Songs
-2023-03-21 11:31:06 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-03-21 11:31:06 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.12.Final
-2023-03-21 11:31:06 [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
-2023-03-21 11:31:06 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2023-03-21 11:31:07 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2023-03-21 11:31:07 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
-2023-03-21 11:31:08 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-03-21 11:31:08 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-03-21 11:31:10 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
-2023-03-21 11:31:10 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-03-21 11:31:11 [main] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/sample'
-2023-03-21 11:31:11 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@74bca236, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@526fbb80, org.springframework.security.web.context.SecurityContextPersistenceFilter@5bd585a5, org.springframework.security.web.header.HeaderWriterFilter@61d1315b, org.springframework.security.web.authentication.logout.LogoutFilter@77198cce, com.karaoke.karaokemaker.config.JsonObjectAuthenticationFilter@33dcbdc2, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@6f636de3, com.karaoke.karaokemaker.config.JwtAuthorizationFilter@3e37c38f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4a03c4bc, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@453ca7f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2f0b7b6d, org.springframework.security.web.session.SessionManagementFilter@61fb3dae, org.springframework.security.web.access.ExceptionTranslationFilter@34d776eb, org.springframework.security.web.access.intercept.AuthorizationFilter@353aadd7]
-2023-03-21 11:31:13 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
-2023-03-21 11:31:13 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
-2023-03-21 11:31:13 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 0 ms
-2023-03-21 11:31:14 [main] INFO  c.k.k.c.ChordControllerTest - Started ChordControllerTest in 16.566 seconds (JVM running for 19.108)
-2023-03-21 11:31:14 [main] INFO  c.k.k.controllers.ChordController - Updating chord
-2023-03-21 11:31:14 [main] INFO  c.k.k.controllers.ChordController - Getting all chords
-2023-03-21 11:31:14 [main] INFO  c.k.k.controllers.ChordController - Create chords
-2023-03-21 11:31:14 [main] INFO  c.k.k.controllers.ChordController - Deleting chord
-2023-03-21 11:31:14 [main] INFO  c.k.k.controllers.ChordController - Getting single chord
-2023-03-21 11:31:14 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-03-21 11:31:14 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2023-03-21 11:31:14 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
-2023-03-21 11:31:14 [SpringApplicationShutdownHook] INFO  org.ehcache.core.EhcacheManager - Cache 'Songs' removed from EhcacheManager.
+2023-05-01 23:32:05 [main] INFO  c.k.k.c.ChordControllerTest - Starting ChordControllerTest using Java 18.0.1.1 on DESKTOP-9RD7I2V with PID 19896 (started by JAVA in C:\Users\JAVA\IdeaProjects\KaraokeMaker)
+2023-05-01 23:32:05 [main] INFO  c.k.k.c.ChordControllerTest - No active profile set, falling back to 1 default profile: "default"
+2023-05-01 23:32:10 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-01 23:32:10 [main] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 277 ms. Found 3 JPA repository interfaces.
+2023-05-01 23:32:15 [main] INFO  org.ehcache.core.EhcacheManager - Cache 'Songs' created in EhcacheManager.
+2023-05-01 23:32:16 [main] INFO  org.ehcache.jsr107.Eh107CacheManager - Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/JAVA/IdeaProjects/KaraokeMaker/target/classes/ehcache.xml,Cache=Songs
+2023-05-01 23:32:16 [main] INFO  org.ehcache.jsr107.Eh107CacheManager - Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/JAVA/IdeaProjects/KaraokeMaker/target/classes/ehcache.xml,Cache=Songs
+2023-05-01 23:32:17 [main] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-01 23:32:18 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.12.Final
+2023-05-01 23:32:18 [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-05-01 23:32:19 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-05-01 23:32:20 [main] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-05-01 23:32:20 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-05-01 23:32:22 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-01 23:32:22 [main] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-01 23:32:27 [restartedMain] INFO  c.k.k.KaraokemakerApplication - Starting KaraokemakerApplication using Java 18.0.1.1 on DESKTOP-9RD7I2V with PID 22920 (C:\Users\JAVA\IdeaProjects\KaraokeMaker\target\classes started by JAVA in C:\Users\JAVA\IdeaProjects\KaraokeMaker)
+2023-05-01 23:32:27 [restartedMain] INFO  c.k.k.KaraokemakerApplication - No active profile set, falling back to 1 default profile: "default"
+2023-05-01 23:32:28 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-05-01 23:32:28 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-05-01 23:32:28 [main] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+2023-05-01 23:32:29 [main] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-01 23:32:30 [main] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/sample'
+2023-05-01 23:32:32 [main] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1313dea8, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@74bca236, org.springframework.security.web.context.SecurityContextPersistenceFilter@65c040c9, org.springframework.security.web.header.HeaderWriterFilter@49d5b651, org.springframework.security.web.authentication.logout.LogoutFilter@e7b7395, com.karaoke.karaokemaker.config.JsonObjectAuthenticationFilter@526fbb80, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@40f49d72, com.karaoke.karaokemaker.config.JwtAuthorizationFilter@33dcbdc2, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3d0c88f4, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5d41b929, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3e37c38f, org.springframework.security.web.session.SessionManagementFilter@9c88323, org.springframework.security.web.access.ExceptionTranslationFilter@60a3a0fa, org.springframework.security.web.access.intercept.AuthorizationFilter@39595a8]
+2023-05-01 23:32:35 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-01 23:32:35 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 253 ms. Found 3 JPA repository interfaces.
+2023-05-01 23:32:35 [main] INFO  o.s.b.t.m.w.SpringBootMockServletContext - Initializing Spring TestDispatcherServlet ''
+2023-05-01 23:32:35 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Initializing Servlet ''
+2023-05-01 23:32:35 [main] INFO  o.s.t.w.s.TestDispatcherServlet - Completed initialization in 14 ms
+2023-05-01 23:32:38 [main] INFO  c.k.k.c.ChordControllerTest - Started ChordControllerTest in 33.604 seconds (JVM running for 37.03)
+2023-05-01 23:32:38 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-01 23:32:38 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-05-01 23:32:38 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-05-01 23:32:38 [SpringApplicationShutdownHook] INFO  org.ehcache.core.EhcacheManager - Cache 'Songs' removed from EhcacheManager.
+2023-05-01 23:32:39 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2023-05-01 23:32:39 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-05-01 23:32:39 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.68]
+2023-05-01 23:32:40 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2023-05-01 23:32:40 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 12660 ms
+2023-05-01 23:32:41 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2023-05-01 23:32:42 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2023-05-01 23:32:42 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/sample'
+2023-05-01 23:32:44 [restartedMain] INFO  org.ehcache.core.EhcacheManager - Cache 'Songs' created in EhcacheManager.
+2023-05-01 23:32:44 [restartedMain] INFO  org.ehcache.jsr107.Eh107CacheManager - Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/JAVA/IdeaProjects/KaraokeMaker/target/classes/ehcache.xml,Cache=Songs
+2023-05-01 23:32:44 [restartedMain] INFO  org.ehcache.jsr107.Eh107CacheManager - Registering Ehcache MBean javax.cache:type=CacheStatistics,CacheManager=file./C./Users/JAVA/IdeaProjects/KaraokeMaker/target/classes/ehcache.xml,Cache=Songs
+2023-05-01 23:32:44 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-01 23:32:45 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.12.Final
+2023-05-01 23:32:45 [restartedMain] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-05-01 23:32:45 [restartedMain] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+2023-05-01 23:32:47 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-01 23:32:47 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-01 23:32:51 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+2023-05-01 23:32:51 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-01 23:32:52 [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@10420301, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@427d2d01, org.springframework.security.web.context.SecurityContextPersistenceFilter@24252292, org.springframework.security.web.header.HeaderWriterFilter@2cbd17e5, org.springframework.security.web.authentication.logout.LogoutFilter@441955a9, com.karaoke.karaokemaker.config.JsonObjectAuthenticationFilter@544b4e1a, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@73bca38f, com.karaoke.karaokemaker.config.JwtAuthorizationFilter@f3f0e19, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2b4d523e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@197b8409, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@fe54ef4, org.springframework.security.web.session.SessionManagementFilter@183ae1bb, org.springframework.security.web.access.ExceptionTranslationFilter@71dd2ccb, org.springframework.security.web.access.intercept.AuthorizationFilter@6ea79959]
+2023-05-01 23:32:53 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-05-01 23:32:54 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-01 23:32:55 [restartedMain] INFO  c.k.k.KaraokemakerApplication - Started KaraokemakerApplication in 30.736 seconds (JVM running for 33.641)
+2023-05-01 23:33:33 [http-nio-8080-exec-8] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-01 23:33:33 [http-nio-8080-exec-8] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-05-01 23:33:33 [http-nio-8080-exec-8] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 3 ms
+2023-05-01 23:35:21 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-01 23:35:21 [SpringApplicationShutdownHook] INFO  org.ehcache.core.EhcacheManager - Cache 'Songs' removed from EhcacheManager.
+2023-05-01 23:35:21 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2023-05-01 23:35:21 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
