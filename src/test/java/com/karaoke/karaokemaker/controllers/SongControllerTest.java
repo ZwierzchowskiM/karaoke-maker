@@ -5,7 +5,7 @@ import com.karaoke.karaokemaker.dto.SongDto;
 import com.karaoke.karaokemaker.dto.SongRequestDto;
 import com.karaoke.karaokemaker.model.Song;
 import com.karaoke.karaokemaker.repositories.SongRepository;
-import com.karaoke.karaokemaker.service.SongDtoMapper;
+import com.karaoke.karaokemaker.service.mapper.SongDtoMapper;
 import com.karaoke.karaokemaker.service.SongService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;

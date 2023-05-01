@@ -6,7 +6,7 @@ import com.karaoke.karaokemaker.dto.SongRequestDto;
 import com.karaoke.karaokemaker.exceptions.ResourceNotFoundException;
 import com.karaoke.karaokemaker.model.Song;
 import com.karaoke.karaokemaker.repositories.SongRepository;
-import com.karaoke.karaokemaker.service.SongDtoMapper;
+import com.karaoke.karaokemaker.service.mapper.SongDtoMapper;
 import com.karaoke.karaokemaker.service.SongService;
 import com.karaoke.karaokemaker.service.UserService;
 import org.springframework.core.io.InputStreamResource;

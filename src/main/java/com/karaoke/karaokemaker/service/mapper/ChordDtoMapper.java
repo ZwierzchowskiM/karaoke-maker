@@ -1,7 +1,8 @@
-package com.karaoke.karaokemaker.service;
+package com.karaoke.karaokemaker.service.mapper;
 
 import com.karaoke.karaokemaker.dto.ChordDto;
 import com.karaoke.karaokemaker.model.Chord;
+import com.karaoke.karaokemaker.service.ChordService;
 import org.springframework.stereotype.Service;
 import java.util.List;
 

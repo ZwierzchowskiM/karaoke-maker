@@ -1,12 +1,7 @@
 package com.karaoke.karaokemaker.controllers;
 
-import com.karaoke.karaokemaker.dto.SongDto;
-import com.karaoke.karaokemaker.model.Song;
 import com.karaoke.karaokemaker.model.User;
-import com.karaoke.karaokemaker.repositories.SongRepository;
 import com.karaoke.karaokemaker.repositories.UserRepository;
-import com.karaoke.karaokemaker.service.SongDtoMapper;
-import com.karaoke.karaokemaker.service.SongService;
 import com.karaoke.karaokemaker.service.UserService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -27,7 +22,6 @@ import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
