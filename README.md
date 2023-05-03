@@ -62,7 +62,7 @@ http://localhost:8080/swagger-ui/#/
 Something similar to this should appear:
 
 <div align="left">
- <img src="https://github.com/ZwierzchowskiM/KaraokeMakerRestAPI/blob/main/Files/images/swagger_ui.PNG" width="600" height="300">
+ <img src="https://github.com/ZwierzchowskiM/karaoke-maker/blob/main/Files/images/swagger_ui.PNG" width="600" height="300">
 </div>
 	
 ## Instruction of use
