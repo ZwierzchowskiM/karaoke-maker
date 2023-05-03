@@ -1,5 +1,6 @@
 package com.karaoke.karaokemaker.controllers;
 
+import com.karaoke.karaokemaker.dto.UserDto;
 import com.karaoke.karaokemaker.dto.UserRegistrationDto;
 import com.karaoke.karaokemaker.exceptions.ResourceNotFoundException;
 import com.karaoke.karaokemaker.model.User;
@@ -34,7 +35,7 @@ public class UserController {
 
     @GetMapping("/")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public ResponseEntity<List<User>> getUsers() {
+    public ResponseEntity<List<UserDto>> getUsers() {
         return ResponseEntity.ok(userService.findUsers());
     }
 

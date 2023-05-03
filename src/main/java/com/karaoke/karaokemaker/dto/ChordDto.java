@@ -15,5 +15,4 @@ public class ChordDto {
     BassNote bassNote;
     Length length;
     Complexity complexity;
-
 }

@@ -1,12 +1,8 @@
 package com.karaoke.karaokemaker.controllers;
 
-import com.karaoke.karaokemaker.dto.SongDto;
-import com.karaoke.karaokemaker.model.Song;
+import com.karaoke.karaokemaker.dto.UserDto;
 import com.karaoke.karaokemaker.model.User;
-import com.karaoke.karaokemaker.repositories.SongRepository;
 import com.karaoke.karaokemaker.repositories.UserRepository;
-import com.karaoke.karaokemaker.service.SongDtoMapper;
-import com.karaoke.karaokemaker.service.SongService;
 import com.karaoke.karaokemaker.service.UserService;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
@@ -27,7 +23,6 @@ import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -67,15 +62,14 @@ class UserControllerTest {
     @Test
     void getUsers_thenReturnAllUsersStatusOk() throws Exception {
 
-        User user1 = new User();
+        UserDto user1 = new UserDto();
         user1.setFirstName("Foo");
-        user1.setId(1L);
 
-        User user2 = new User();
+        UserDto user2 = new UserDto();
         user2.setFirstName("Bar");
-        user2.setId(2L);
 
-        List<User> allUsers = Arrays.asList(user1,user2);
+
+        List<UserDto> allUsers = Arrays.asList(user1,user2);
         when(userService.findUsers()).thenReturn(allUsers);
 
         mockMvc.perform(MockMvcRequestBuilders

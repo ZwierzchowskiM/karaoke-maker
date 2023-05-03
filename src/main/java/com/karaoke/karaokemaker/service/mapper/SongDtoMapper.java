@@ -1,4 +1,4 @@
-package com.karaoke.karaokemaker.service;
+package com.karaoke.karaokemaker.service.mapper;
 
 import com.karaoke.karaokemaker.dto.SongDto;
 import com.karaoke.karaokemaker.model.Song;

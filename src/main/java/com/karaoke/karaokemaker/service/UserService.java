@@ -1,9 +1,11 @@
 package com.karaoke.karaokemaker.service;
 
+import com.karaoke.karaokemaker.dto.UserDto;
 import com.karaoke.karaokemaker.dto.UserRegistrationDto;
 import com.karaoke.karaokemaker.exceptions.ResourceNotFoundException;
 import com.karaoke.karaokemaker.model.User;
 import com.karaoke.karaokemaker.repositories.UserRepository;
+import com.karaoke.karaokemaker.service.mapper.UserDtoMapper;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,37 +20,26 @@ import java.util.Set;
 @Service
 public class UserService {
 
-    private final Validator validator;
-    UserRepository userRepository;
     private static final String USER_ROLE = "USER";
     private static final String ADMIN_AUTHORITY = "ROLE_ADMIN";
+    private final Validator validator;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final UserDtoMapper userDtoMapper;
 
-    public UserService(Validator validator, UserRepository userRepository, PasswordEncoder passwordEncoder) {
+
+    public UserService(Validator validator, UserRepository userRepository, PasswordEncoder passwordEncoder, UserDtoMapper userDtoMapper) {
         this.validator = validator;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.userDtoMapper = userDtoMapper;
     }
 
-    public void addUser(User user) {
-        Set<ConstraintViolation<User>> errors = validator.validate(user);
-        if (!errors.isEmpty()) {
-            System.out.println(">Obiekt nie może być dodany, lista błędów:");
-            errors.forEach(err ->
-                    System.out.printf(">>> %s %s (%s)\n",
-                            err.getPropertyPath(),
-                            err.getMessage(),
-                            err.getInvalidValue())
-            );
-        } else {
-            userRepository.save(user);
-            System.out.println(">Obiekt został dodany");
-        }
-    }
+    public List<UserDto> findUsers() {
 
-    public List<User> findUsers() {
-
-        return (List<User>) userRepository.findAll();
+        List<User> users = (List<User>) userRepository.findAll();
+        List<UserDto> usersDto = userDtoMapper.fromList(users);
+        return usersDto;
     }
 
     public Optional<User> findUserById(Long id) {
@@ -72,10 +63,8 @@ public class UserService {
 
     public Long currentUserId() {
 
-//        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-//        Long userId = findCredentialsByEmail(userName).get().getId();
-
-        return 1L;
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        return findCredentialsByEmail(userName).get().getId();
     }
 
     public String currentUserName() {
